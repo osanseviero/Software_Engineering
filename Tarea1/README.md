@@ -17,6 +17,9 @@ Process:
 * Packaging of computer.
 
 Implementation 
-	Computer if the base class and implementation. It uses pure virtual functions to enforce the overriding of subclasses. 
+
+	Computer is the base class and implementation. It uses pure virtual functions to enforce the overriding of subclasses. 
+	
 	Computer factory was done separated to keep implementation separated from interface.
+	
 	If the company needs to add another type of computer, just computerFactory class needs to be changed. 
