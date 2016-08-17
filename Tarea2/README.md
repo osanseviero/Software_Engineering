@@ -26,3 +26,4 @@ Implementation
 	
 	If the company needs to add another type of computer, just computerFactory class needs to be changed. 
 
+	To add layers of protection and mantain the Singleton Pattern, copy and assignment were made private. Also, most of the class constructors are now private.

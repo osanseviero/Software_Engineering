@@ -11,11 +11,15 @@ public:
 
 	Computer* create(std::string type) {
 		Computer* c = createComputer(type);
-		c->selectComponents();
-		c->assemble();
-		c->installSoftware();
-		c->package();
-		return c;
+		if(c != NULL) {
+			c->selectComponents();
+			c->assemble();
+			c->installSoftware();
+			c->package();
+			return c;
+		}
+		std::cout << type <<  " computer type not recognized" << std::endl;
+		return NULL;
 	}
 };
 

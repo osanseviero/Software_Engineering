@@ -20,15 +20,16 @@ public:
 	}
 
 	static ComputerFactoryConcrete* GetInstance(){
-		//if (!isInstance) {
-			// std::cout << "Hi"; // Uncomment to check that it only creates the instance once
-			return new ComputerFactoryConcrete();
-		//}
-		//return isInstance;
+		static ComputerFactoryConcrete* instance = new ComputerFactoryConcrete;	// Just runs one time because it is static
+		return instance;
 	}
+	
 
 private:
-	static ComputerFactoryConcrete* isInstance;
-	ComputerFactoryConcrete(){ isInstance=NULL;};
+	ComputerFactoryConcrete(){};
+	ComputerFactoryConcrete(const ComputerFactoryConcrete &old);
+	const ComputerFactoryConcrete &operator=(const ComputerFactoryConcrete &old);
+	
 };
+
 

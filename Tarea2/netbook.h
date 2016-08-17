@@ -1,5 +1,7 @@
 class Netbook : public Computer {
 public:
+	friend class ComputerFactoryConcrete;
+
 	void assemble(){
 		std::cout << "Assembling netbook parts." << std::endl;
 	}
@@ -17,4 +19,7 @@ public:
 	}
 
 	virtual ~Netbook(){};
+
+private:
+	Netbook(){};
 };

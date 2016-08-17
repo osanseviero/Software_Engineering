@@ -1,5 +1,7 @@
 class Tablet : public Computer {
 public:
+	friend class ComputerFactoryConcrete;
+
 	void assemble(){
 		std::cout << "Assembling tablet parts." << std::endl;
 	}
@@ -17,4 +19,7 @@ public:
 	}
 
 	virtual ~Tablet(){};
+
+private:
+	Tablet(){};
 };
