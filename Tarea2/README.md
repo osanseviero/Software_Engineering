@@ -1,5 +1,5 @@
 # Computer Factory 
-API that encapsulates process of computer creation. It needs to be flexible so code does not need to be changed. It need to implement Factory Pattern and Singleton Pattern.
+API that encapsulates process of computer creation. It needs to be flexible so code does not need to be changed. It needs to implement Factory Pattern and Singleton Pattern.
 
 Types of computer (In the future there will be more.)
 
