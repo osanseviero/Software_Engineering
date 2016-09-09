@@ -31,5 +31,3 @@ private:
 	const ComputerFactoryConcrete &operator=(const ComputerFactoryConcrete &old);
 	
 };
-
-
