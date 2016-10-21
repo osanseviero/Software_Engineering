@@ -2,6 +2,8 @@
 #include <vector>
 #include <algorithm>
 #include <list>
+#include "news.cpp"
+#include "proxy.cpp"
 #include "cadena.cpp"
 #include "televisa.cpp"
 #include "cnn.cpp"
@@ -12,8 +14,6 @@
 #include "pena.cpp"
 #include "hillary.cpp"
 #include "trump.cpp"
-#include "news.cpp"
-#include "proxy.cpp"
 #include "sistema.cpp"
 using namespace std;
 

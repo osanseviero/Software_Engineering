@@ -2,13 +2,19 @@ class Formula : public Cadena
 {
     std::string name;
     std::vector<std::string> news;
+
+    Proxy newsHolder[100];
+    int idx;
+    
 public:
     Formula(std::string n) {
-         this->name = name;
+        this->name = name;
+        idx = 0;
     }
 
     void Publish(std::string publication) {
     	news.push_back(publication);
+        newsHolder[idx++].publish(publication);
     }
 
     void ReadFeed() {
