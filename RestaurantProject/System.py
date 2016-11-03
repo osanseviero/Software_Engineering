@@ -22,7 +22,7 @@ class System:
 		if (not self.isUserLogged()):
 			self.logInUser()
 		else:
-			chefInterface(db.workers, db.recipes)
+			ChefInterface(db.workers, db.recipes)
 
 	def logInUser(self):
 		'''Code to log in the user and authenticate'''
