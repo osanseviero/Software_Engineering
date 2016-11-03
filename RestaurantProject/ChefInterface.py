@@ -7,21 +7,16 @@ client = MongoClient()
 db = client.test_database	
 t = Terminal()
 
-import os
+
 
 class Chef(Worker.WorkerManager):
 	def __init__(self, workers, recipes):
 		self.workers = workers
 		self.recipes = recipes
-		self.recipesInterface()
 
 	def findRecipe(self, name):
 		'''Finds a recipe. Returns None if not found'''
 		return self.recipes.find_one({"name": name})
-		
-	def clearWindow(self):
-		'''Clears the console window'''
-		os.system('cls' if os.name == 'nt' else 'clear')
 
 	def newRecipe(self, name, price):
 		'''Creates a recipe document and saves it to the recipes collection'''
@@ -95,7 +90,7 @@ class Chef(Worker.WorkerManager):
 			print t.blink(t.red("(4)")), "Delete a recipe by name"
 			print t.blink(t.red("(5)")), "Delete all recipes"
 			print t.blink(t.red("(6)")), "Exit recipes interface"
-			option = input(t.bold("1|2|3|4|5 "))
+			option = input(t.bold("1|2|3|4|5|6 "))
 			if(option == 1):
 				self.createRecipe()
 			elif(option == 2):

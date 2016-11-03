@@ -1,8 +1,14 @@
+import os
+
 class WorkerManager:
 	'API to interact with workers'
 
 	def __init__(self, collection):
 		self.workers = collection
+
+	def clearWindow(self):
+		'''Clears the console window'''
+		os.system('cls' if os.name == 'nt' else 'clear')
 
 	def createWorker(self, user, name, lastname, password, salary):
 		newWorker = {"user" : user, "name" : name, "lastname": lastname, "password": sha256_crypt.encrypt(password), "salary" : salary}

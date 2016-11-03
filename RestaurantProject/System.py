@@ -6,6 +6,7 @@ db = client.test_database
 t = Terminal()
 
 import ChefInterface
+import WaiterInterface
 
 class System:
 	''' Class to manage the whole system'''
@@ -22,11 +23,11 @@ class System:
 		if (not self.isUserLogged()):
 			self.logInUser()
 		else:
-			ChefInterface(db.workers, db.recipes)
+			WaiterInterface.Waiter(db.workers, db.recipes)
 
 	def logInUser(self):
 		'''Code to log in the user and authenticate'''
-		ChefInterface.Chef(db.workers, db.recipes)
+		WaiterInterface.Waiter(db.workers, db.recipes, db.tables)
 
 
 
