@@ -1,4 +1,5 @@
 import Worker
+import Table
 
 from pymongo import MongoClient
 from passlib.hash import sha256_crypt
@@ -30,7 +31,10 @@ class Waiter(Worker.WorkerManager):
 		else:
 			print t.bold("List of Tables")
 			for table in self.tables.find():
-				print "Table: " + table["num"] + " Max persons: " + table["persons"]
+				print table
+
+	def clearTables(self):
+		db.drop_collection(self.tables)
 
 	def printRecipes(self):
 		'''Prints all the recipes in document format'''
@@ -42,16 +46,6 @@ class Waiter(Worker.WorkerManager):
 			for recipe in self.recipes.find():
 				print recipe	
 
-	def showTables(self):
-		'''Prints all the recipes in document format'''
-		self.clearWindow()
-		if(self.tables.count() == 0):
-			print "There are no tables"
-		else:
-			print t.bold("List of Tables")
-			for table in self.tables.find():
-				print table	
-
 	def newTable(self, num, persons):
 		'''Creates a table document and saves it to the tables collection'''
 		newTable = {"num" : num, "persons" : persons}
@@ -62,13 +56,13 @@ class Waiter(Worker.WorkerManager):
 		'''Asks the input to create the table and validate it.'''
 		anotherTable= True
 		while(anotherTable):
-			num = raw_input("What's the number of the table? ")
-			persons = raw_input("What's the number of max persons in table?")
+			num = int(raw_input("What's the number of the table? "))
+			persons = int(raw_input("What's the number of max persons in table?"))
 			checkTable = self.findTable(num)
 			if(checkTable != None):
 				print "Sorry, a table with this number is already in the database"
 			else:
-				if(persons > 12):	#BUG
+				if(persons > 12):
 					print "Sorry, there can't be a table with more than 12 persons."
 				elif(persons <= 1):
 					print "Sorry, the table needs to have at least 2 persons max."
@@ -89,7 +83,7 @@ class Waiter(Worker.WorkerManager):
 		if(not table):
 			print "Table was not found"
 		else:
-			print "Table interface"
+			Table.Table(self.tables, table)
 
 
 
@@ -101,7 +95,7 @@ class Waiter(Worker.WorkerManager):
 			print t.blink(t.bold("(2)")), "Create new table (to edit: this can only be done by admin)"
 			print t.blink(t.bold("(3)")), "List all tables"
 			print t.blink(t.bold("(4)")), "Select table"
-			print t.blink(t.red("(6)")), "Exit recipes interface"
+			print t.blink(t.red("(6)")), "Exit waiter interface"
 			option = input(t.bold("1|2|3|4|5|6 "))
 			if(option == 1):
 				self.printRecipes()
@@ -113,6 +107,8 @@ class Waiter(Worker.WorkerManager):
 				self.selectTable()
 			elif(option == 6):
 				anotherCommand = False
+			elif(option == 7):
+				self.clearTables()
 			else:
 				self.clearWindow()
 				print "I did not understand you. Please just write the number"
