@@ -13,6 +13,7 @@ class Chef(Worker.WorkerManager):
 	def __init__(self, workers, recipes):
 		self.workers = workers
 		self.recipes = recipes
+		self.recipesInterface()
 
 	def findRecipe(self, name):
 		'''Finds a recipe. Returns None if not found'''

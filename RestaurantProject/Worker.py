@@ -1,7 +1,9 @@
 import os
 
 class WorkerManager:
-	'API to interact with workers'
+	'''API to interact with workers.
+		This is just a test, some of this functions are for the login system and admin.
+	'''
 
 	def __init__(self, collection):
 		self.workers = collection

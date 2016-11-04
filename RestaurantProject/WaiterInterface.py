@@ -30,7 +30,7 @@ class Waiter(Worker.WorkerManager):
 		else:
 			print t.bold("List of Tables")
 			for table in self.tables.find():
-				print table
+				print "Table: " + table["num"] + " Max persons: " + table["persons"]
 
 	def printRecipes(self):
 		'''Prints all the recipes in document format'''
@@ -41,6 +41,16 @@ class Waiter(Worker.WorkerManager):
 			print t.bold("List of Recipes")
 			for recipe in self.recipes.find():
 				print recipe	
+
+	def showTables(self):
+		'''Prints all the recipes in document format'''
+		self.clearWindow()
+		if(self.tables.count() == 0):
+			print "There are no tables"
+		else:
+			print t.bold("List of Tables")
+			for table in self.tables.find():
+				print table	
 
 	def newTable(self, num, persons):
 		'''Creates a table document and saves it to the tables collection'''
@@ -58,7 +68,11 @@ class Waiter(Worker.WorkerManager):
 			if(checkTable != None):
 				print "Sorry, a table with this number is already in the database"
 			else:
-				if(self.tables.count() == self.max_tables):
+				if(persons > 12):	#BUG
+					print "Sorry, there can't be a table with more than 12 persons."
+				elif(persons <= 1):
+					print "Sorry, the table needs to have at least 2 persons max."
+				elif(self.tables.count() == self.max_tables):
 					print "Sorry, the max number of tables was reached"
 					anotherTable = False
 				else:
@@ -68,18 +82,35 @@ class Waiter(Worker.WorkerManager):
 				anotherTable = False
 				self.clearWindow()
 
+	def selectTable(self):
+		self.clearWindow()
+		self.printTables()
+		table = self.findTable(raw_input("Write the table number: "))
+		if(not table):
+			print "Table was not found"
+		else:
+			print "Table interface"
+
+
+
 	def interface(self):
 		anotherCommand = True
 		while(anotherCommand):
 			print "What do you want to do?"
 			print t.blink(t.bold("(1)")), "List all recipes"
-			print t.blink(t.bold("(2)")), "Create a new table"
+			print t.blink(t.bold("(2)")), "Create new table (to edit: this can only be done by admin)"
+			print t.blink(t.bold("(3)")), "List all tables"
+			print t.blink(t.bold("(4)")), "Select table"
 			print t.blink(t.red("(6)")), "Exit recipes interface"
 			option = input(t.bold("1|2|3|4|5|6 "))
 			if(option == 1):
 				self.printRecipes()
 			elif(option == 2):
 				self.createTable()
+			elif(option == 3):
+				self.printTables()
+			elif(option == 4):
+				self.selectTable()
 			elif(option == 6):
 				anotherCommand = False
 			else:
