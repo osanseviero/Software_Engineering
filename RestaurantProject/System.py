@@ -23,11 +23,11 @@ class System:
 		if (not self.isUserLogged()):
 			self.logInUser()
 		else:
-			ChefInterface.Chef(db.workers, db.recipes)
+			ChefInterface.Chef()
 
 	def logInUser(self):
 		'''Code to log in the user and authenticate'''
-		WaiterInterface.Waiter(db.workers, db.recipes, db.tables)
+		WaiterInterface.Waiter()
 
 
 

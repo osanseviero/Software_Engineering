@@ -1,5 +1,6 @@
 import Worker
 import Table
+import helper
 
 from pymongo import MongoClient
 from passlib.hash import sha256_crypt
@@ -13,47 +14,38 @@ import os
 class Waiter(Worker.WorkerManager):
 	max_tables = 10
 
-	def __init__(self, workers, recipes, tables):
-		self.workers = workers
-		self.recipes = recipes
-		self.tables = tables
+	def __init__(self):
 		self.interface()
 
 	def findTable(self, num):
 		'''Finds a table. Returns None if not found'''
-		return self.tables.find_one({"num": num})
+		return helper.getTables().find_one({"num": num})
 
 	def printTables(self):
 		'''Prints all the tables in document format'''
-		self.clearWindow()
-		if(self.tables.count() == 0):
+		helper.clearWindow()
+		if(helper.getTables().count() == 0):
 			print "There are no recipes"
 		else:
 			print t.bold("List of Tables")
-			for table in self.tables.find():
-				print table
+			for table in helper.getTables().find():
+				if(helper.getTables()['numPeople'] == None):
+					print "Table " + table['num'] + " | It has no people."
+				else:
+					print "Table " + str(table['num']) + " | It has " + str(table['numPeople']) + " persons."
 
 	def clearTables(self):
-		db.drop_collection(self.tables)
-
-	def printRecipes(self):
-		'''Prints all the recipes in document format'''
-		self.clearWindow()
-		if(self.recipes.count() == 0):
-			print "There are no recipes"
-		else:
-			print t.bold("List of Recipes")
-			for recipe in self.recipes.find():
-				print recipe	
+		'''Drop all tables from collection. Should just be in admin.'''
+		db.drop_collection(helper.getTables())
 
 	def newTable(self, num, persons):
-		'''Creates a table document and saves it to the tables collection'''
-		newTable = {"num" : num, "persons" : persons}
-		self.tables.insert(newTable)
-		print "Created table: " , t.bold(num)
+		'''Creates a table document and saves it to the tables collection. Should just be in admin.'''
+		newTable = {"num" : num, "persons" : persons, "numPeople" : 0}
+		helper.getTables().insert(newTable)
+		print "Created table: " , t.bold(str(num))
 
 	def createTable(self):
-		'''Asks the input to create the table and validate it.'''
+		'''Asks the input to create the table and validate it. Should just be in admin'''
 		anotherTable= True
 		while(anotherTable):
 			num = int(raw_input("What's the number of the table? "))
@@ -66,7 +58,7 @@ class Waiter(Worker.WorkerManager):
 					print "Sorry, there can't be a table with more than 12 persons."
 				elif(persons <= 1):
 					print "Sorry, the table needs to have at least 2 persons max."
-				elif(self.tables.count() == self.max_tables):
+				elif(helper.getTables().count() == self.max_tables):
 					print "Sorry, the max number of tables was reached"
 					anotherTable = False
 				else:
@@ -79,13 +71,11 @@ class Waiter(Worker.WorkerManager):
 	def selectTable(self):
 		self.clearWindow()
 		self.printTables()
-		table = self.findTable(raw_input("Write the table number: "))
+		table = self.findTable(int(raw_input("Write the table number: ")))
 		if(not table):
 			print "Table was not found"
 		else:
-			Table.Table(self.tables, table)
-
-
+			Table.Table(table)
 
 	def interface(self):
 		anotherCommand = True
@@ -98,7 +88,7 @@ class Waiter(Worker.WorkerManager):
 			print t.blink(t.red("(6)")), "Exit waiter interface"
 			option = input(t.bold("1|2|3|4|5|6 "))
 			if(option == 1):
-				self.printRecipes()
+				helper.printRecipes()
 			elif(option == 2):
 				self.createTable()
 			elif(option == 3):
