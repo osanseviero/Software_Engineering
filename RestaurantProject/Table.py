@@ -1,14 +1,4 @@
-import order
-
-from pymongo import MongoClient
-from passlib.hash import sha256_crypt
-from blessings import Terminal
-client = MongoClient()
-db = client.test_database	
-t = Terminal()
-
-import helper
-import os
+from requirements import *
 
 class Table():
 	def __init__(self, table):

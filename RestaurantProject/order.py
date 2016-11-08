@@ -1,12 +1,4 @@
-from pymongo import MongoClient
-from passlib.hash import sha256_crypt
-from blessings import Terminal
-client = MongoClient()
-db = client.test_database	
-t = Terminal()
-
-import os
-import helper
+from requirements import *
 
 def printRecipes():
 	helper.printRecipes()

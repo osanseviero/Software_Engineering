@@ -1,15 +1,4 @@
-from pymongo import MongoClient
-from passlib.hash import sha256_crypt
-from blessings import Terminal
-client = MongoClient()
-db = client.test_database	
-t = Terminal()
-from getpass import getpass
-
-import ChefInterface
-import WaiterInterface
-import AdminInterface
-import helper
+from requirements import *
 
 class System:
 	''' Class to manage the whole system'''
@@ -29,6 +18,7 @@ class System:
 	def logInUser(self):
 		'''Code to log in the user and authenticate'''
 		anotherCommand = True
+		workers = db.workers
 
 		while anotherCommand:
 			username = raw_input(t.bold("Which is the username?(q for quit) "))
@@ -37,17 +27,15 @@ class System:
 			else:
 				password = getpass('Enter your password: ')
 				if helper.checkPassword(username, password):
-					userType = int(db.workers.find_one({"user": username})["type"])
+					userType = int(workers.find_one({"user": username})["type"])
 					if(userType == 1):
-						AdminInterface.Admin(db.workers)
+						AdminInterface.Admin(workers)
 					elif(userType == 2):
 						ChefInterface.Chef()
 					elif(userType == 3):
 						WaiterInterface.Waiter()
 				else:
 					print "Wrong password"
-
-
 
 a = System()
 a.enter()

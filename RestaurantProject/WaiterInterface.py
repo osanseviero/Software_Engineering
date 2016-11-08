@@ -1,14 +1,4 @@
-import Table
-import helper
-
-from pymongo import MongoClient
-from passlib.hash import sha256_crypt
-from blessings import Terminal
-client = MongoClient()
-db = client.test_database	
-t = Terminal()
-
-import os
+from requirements import *
 
 class Waiter():
 	max_tables = 10
@@ -69,7 +59,7 @@ class Waiter():
 				self.clearWindow()
 
 	def selectTable(self):
-		self.clearWindow()
+		helper.clearWindow()
 		self.printTables()
 		table = self.findTable(int(raw_input("Write the table number: ")))
 		if(not table):
