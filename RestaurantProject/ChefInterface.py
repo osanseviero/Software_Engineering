@@ -1,4 +1,3 @@
-import Worker
 import helper
 
 from pymongo import MongoClient
@@ -8,10 +7,9 @@ client = MongoClient()
 db = client.test_database	
 t = Terminal()
 
-
-
-class Chef(Worker.WorkerManager):
+class Chef():
 	def __init__(self):
+		helper.clearWindow()
 		self.recipesInterface()
 
 	def newRecipe(self, name, price):

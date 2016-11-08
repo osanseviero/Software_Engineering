@@ -33,3 +33,7 @@ def printRecipes():
 def findRecipe(name):
 	'''Finds a recipe. Returns None if not found'''
 	return getRecipes().find_one({"name": name})
+
+def checkPassword(username, password):
+	hash = db.workers.find_one({"user": username})["password"]
+	return sha256_crypt.verify(password, hash)

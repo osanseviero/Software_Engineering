@@ -4,9 +4,12 @@ from blessings import Terminal
 client = MongoClient()
 db = client.test_database	
 t = Terminal()
+from getpass import getpass
 
 import ChefInterface
 import WaiterInterface
+import AdminInterface
+import helper
 
 class System:
 	''' Class to manage the whole system'''
@@ -14,20 +17,35 @@ class System:
 	userLogged = False
 
 	def __init__(self):
+		helper.clearWindow()
 		print t.underline("Welcome to the restaurant")
 
-	def isUserLogged(self):
-		return self.userLogged
-
 	def enter(self):
-		if (not self.isUserLogged()):
+		if (not self.userLogged):
 			self.logInUser()
 		else:
-			ChefInterface.Chef()
+			AdminInterface.interface()
 
 	def logInUser(self):
 		'''Code to log in the user and authenticate'''
-		ChefInterface.Chef()
+		anotherCommand = True
+
+		while anotherCommand:
+			username = raw_input(t.bold("Which is the username?(q for quit) "))
+			if username == 'q':
+				anotherCommand = False
+			else:
+				password = getpass('Enter your password: ')
+				if helper.checkPassword(username, password):
+					userType = int(db.workers.find_one({"user": username})["type"])
+					if(userType == 1):
+						AdminInterface.Admin(db.workers)
+					elif(userType == 2):
+						ChefInterface.Chef()
+					elif(userType == 3):
+						WaiterInterface.Waiter()
+				else:
+					print "Wrong password"
 
 
 

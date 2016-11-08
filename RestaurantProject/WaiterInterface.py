@@ -1,4 +1,3 @@
-import Worker
 import Table
 import helper
 
@@ -11,10 +10,11 @@ t = Terminal()
 
 import os
 
-class Waiter(Worker.WorkerManager):
+class Waiter():
 	max_tables = 10
 
 	def __init__(self):
+		helper.clearWindow()
 		self.interface()
 
 	def findTable(self, num):
