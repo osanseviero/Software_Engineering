@@ -11,10 +11,34 @@ import helper
 def printRecipes():
 	helper.printRecipes()
 
-def selectRecipe():
-	print "Selecting a recipe"
+def selectRecipe(tableId):
+	helper.clearWindow()
+	printRecipes()
+	name = ''
+	order = []
+	while(name != 'e'):
+		name = raw_input("What's the name of the product? Press s to save. Press e to exit. ").lower()
+		recipe = helper.findRecipe(name)
+		if name != 'e':
+			if(name == 's'):
+				print "Sent the orders."
+				for recipe in order:
+					helper.getRecipes().update({"_id" : recipe['_id'] },{'$inc' : {"pop": 1}})
+				helper.getTables().update({"_id" : tableId },{'$set' : {"order": order}})
+				name = 'e'
+			elif recipe == None:
+				print t.red("Recipe was not found")
+			else:
+				print recipe['name'], " was added to the order."
+				order.append(recipe)
+				print "Current order: "
+				print order
+	for table in helper.getTables().find():
+		print "Table order: " 
+		print table['order']
+		
 
-def newOrder():
+def newOrder(tableId):
 	helper.clearWindow()
 	print "Register the new order"
 	anotherCommand = True
@@ -27,7 +51,7 @@ def newOrder():
 		if(option == 1):
 			printRecipes()
 		elif(option == 2):
-			selectRecipe()
+			selectRecipe(tableId)
 		elif(option == 3):
 			anotherCommand = False
 		else:

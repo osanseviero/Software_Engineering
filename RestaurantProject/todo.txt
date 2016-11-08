@@ -1,6 +1,7 @@
 Sprint 1.
 
 1. Table creation/deletion will be part of admin interface, so it needs to get removed from there.
-2. Some methods like displaying the recipes or clearing the window should become helper methods since they are called from different classes. Make a complete helper file.
-3. Implement the login (part of it is in the Worker class, but should be moved from there).
-4. The cost of the products will be calculated according to the ingredients it has. This should be completed in later sprint.
+2. Implement the login (part of it is in the Worker class, but should be moved from there).
+3. The cost of the products will be calculated according to the ingredients it has. This should be completed in later sprint.
+4. All the validation of input.
+5. Table should only accept order if there is people registered in it.

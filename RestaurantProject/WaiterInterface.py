@@ -40,7 +40,7 @@ class Waiter(Worker.WorkerManager):
 
 	def newTable(self, num, persons):
 		'''Creates a table document and saves it to the tables collection. Should just be in admin.'''
-		newTable = {"num" : num, "persons" : persons, "numPeople" : 0}
+		newTable = {"num" : num, "persons" : persons, "numPeople" : 0, "order" : []}
 		helper.getTables().insert(newTable)
 		print "Created table: " , t.bold(str(num))
 

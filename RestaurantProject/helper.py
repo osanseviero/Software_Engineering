@@ -29,3 +29,7 @@ def printRecipes():
 		print t.bold("List of Recipes")
 		for recipe in getRecipes().find():
 			print "Recipe " , recipe['name'], " cost: "  , recipe['price']
+
+def findRecipe(name):
+	'''Finds a recipe. Returns None if not found'''
+	return getRecipes().find_one({"name": name})

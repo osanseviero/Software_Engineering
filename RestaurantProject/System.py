@@ -27,7 +27,7 @@ class System:
 
 	def logInUser(self):
 		'''Code to log in the user and authenticate'''
-		WaiterInterface.Waiter()
+		ChefInterface.Chef()
 
 
 

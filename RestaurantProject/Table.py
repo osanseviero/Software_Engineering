@@ -44,7 +44,7 @@ class Table():
 			if(option == 1):
 				self.registerPeople()
 			elif(option == 2):
-				order.newOrder()
+				order.newOrder(self.table['_id'])
 			elif(option == 6):
 				anotherCommand = False
 			else:
