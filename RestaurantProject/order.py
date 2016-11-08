@@ -1,4 +1,4 @@
-from requirements import *
+from requirements import *	
 
 def printRecipes():
 	helper.printRecipes()
@@ -25,10 +25,6 @@ def selectRecipe(tableId):
 				order.append(recipe)
 				print "Current order: "
 				print order
-	for table in helper.getTables().find():
-		print "Table order: " 
-		print table['order']
-		
 
 def newOrder(tableId):
 	helper.clearWindow()

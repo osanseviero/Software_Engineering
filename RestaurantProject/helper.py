@@ -27,6 +27,11 @@ def findRecipe(name):
 	'''Finds a recipe. Returns None if not found'''
 	return getRecipes().find_one({"name": name})
 
+def findTable(num):
+	'''Finds a table. Returns None if not found'''
+	return getTables().find_one({"num": num})
+
 def checkPassword(username, password):
 	hash = db.workers.find_one({"user": username})["password"]
 	return sha256_crypt.verify(password, hash)
+

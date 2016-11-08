@@ -10,10 +10,6 @@ class Admin:
 		self.workers = collection
 		self.interface()
 
-	def clearWindow(self):
-		'''Clears the console window'''
-		os.system('cls' if os.name == 'nt' else 'clear')
-
 	def createUser(self, user, name, lastname, password, salary, userType):
 		newWorker = {"user" : user, "name" : name, "lastname": lastname, "password": sha256_crypt.encrypt(password), "salary" : salary, "type": userType}
 		self.workers.insert(newWorker)
@@ -21,7 +17,7 @@ class Admin:
 
 	def newUser(self):
 		'''Register a new user in the system'''
-		self.clearWindow()
+		helper.clearWindow()
 		username = raw_input(t.bold("Which is the username? "))
 		name = raw_input(t.bold("Which is the name? "))
 		lastName = raw_input(t.bold("Which is the lastname? "))
@@ -35,16 +31,53 @@ class Admin:
 		print "Total workers: ", self.workers.count()
 
 	def printWorkers(self):
-		self.clearWindow()
+		helper.clearWindow()
 		for worker in self.workers.find():
-			print worker
+			print worker['user']
+			print "Name of worker: " + worker['name'] + " " + worker['lastname']
+			print "Hour Salary: " , worker['salary']
+			print "------"
 
 	def clearUsers(self):
-		self.clearWindow()
+		helper.clearWindow()
 		db.drop_collection(self.workers)
 
 	def findUser(self, username):
 		return self.workers.find_one({"user": username})
+
+	def newTable(self, num, persons):
+		'''Creates a table document and saves it to the tables collection. Should just be in admin.'''
+		newTable = {"num" : num, "persons" : persons, "numPeople" : 0, "order" : []}
+		helper.getTables().insert(newTable)
+		print "Created table: " , t.bold(str(num))
+
+	def clearTables(self):
+		'''Drop all tables from collection. Should just be in admin.'''
+		db.drop_collection(helper.getTables())
+
+	def createTable(self):
+		'''Asks the input to create the table and validate it. Should just be in admin'''
+		anotherTable= True
+		while(anotherTable):
+			num = int(raw_input("What's the number of the table? "))
+			persons = int(raw_input("What's the number of max persons in table?"))
+			checkTable = helper.findTable(num)
+			if(checkTable != None):
+				print "Sorry, a table with this number is already in the database"
+			else:
+				if(persons > 12):
+					print "Sorry, there can't be a table with more than 12 persons."
+				elif(persons <= 1):
+					print "Sorry, the table needs to have at least 2 persons max."
+				elif(helper.getTables().count() == 10):
+					print "Sorry, the max number of tables was reached"
+					anotherTable = False
+				else:
+					self.newTable(num, persons)
+			another = raw_input("Do you want to create another table?" + t.bold("[y/n]")).lower()
+			if(another == 'n'):
+				anotherTable = False
+				helper.clearWindow()
 
 	def interface(self):
 		'''Main interface to manage the admin'''
@@ -53,16 +86,22 @@ class Admin:
 			print "What do you want to do?"
 			print t.blink(t.bold("(1)")), "Register a new user"
 			print t.blink(t.bold("(2)")), "Print all users"
-			print t.blink(t.bold("(3)")), "Clear user database"
-			print t.blink(t.red("(4)")), "Exit admin interface"
-			option = input(t.bold("1|2|3|4 "))
+			print t.blink(t.bold("(3)")), "Create new table"
+			print t.blink(t.bold("(4)")), "Clear user database"
+			print t.blink(t.bold("(5)")), "Erase table database"
+			print t.blink(t.red("(6)")), "Exit"
+			option = input(t.bold("1|2|3|4|5|6 "))
 			if option == 1:
 				self.newUser()
 			elif option == 2:
 				self.printWorkers()
 			elif option == 3:
-				self.clearUsers()
+				self.createTable()
 			elif option == 4:
+				self.clearUsers()
+			elif option == 5:
+				self.clearTables()
+			elif option == 6:
 				anotherCommand = False
 			else:
 				print "Sorry, I could not understand your command."
