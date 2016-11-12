@@ -1,4 +1,4 @@
-from requirements import *
+from config import *
 
 def getWorkers():
 	return db.workers
@@ -35,3 +35,5 @@ def checkPassword(username, password):
 	hash = db.workers.find_one({"user": username})["password"]
 	return sha256_crypt.verify(password, hash)
 
+def getMaxTables():
+	return 10

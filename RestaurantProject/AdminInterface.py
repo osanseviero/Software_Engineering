@@ -1,4 +1,4 @@
-from requirements import *
+from config import *
 
 class Admin:
 	'''API to interact with workers.
@@ -69,7 +69,7 @@ class Admin:
 					print "Sorry, there can't be a table with more than 12 persons."
 				elif(persons <= 1):
 					print "Sorry, the table needs to have at least 2 persons max."
-				elif(helper.getTables().count() == 10):
+				elif(helper.getTables().count() == helper.getMaxTables()):
 					print "Sorry, the max number of tables was reached"
 					anotherTable = False
 				else:

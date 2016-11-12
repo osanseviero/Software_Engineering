@@ -1,4 +1,4 @@
-from requirements import *	
+from config import *	
 
 def printRecipes():
 	helper.printRecipes()

@@ -1,4 +1,4 @@
-from requirements import *
+from config import *
 
 class System:
 	''' Class to manage the whole system'''
@@ -8,12 +8,6 @@ class System:
 	def __init__(self):
 		helper.clearWindow()
 		print t.underline("Welcome to the restaurant")
-
-	def enter(self):
-		if (not self.userLogged):
-			self.logInUser()
-		else:
-			AdminInterface.interface()
 
 	def logInUser(self):
 		'''Code to log in the user and authenticate'''
@@ -38,4 +32,4 @@ class System:
 					print "Wrong password"
 
 a = System()
-a.enter()
+a.logInUser()

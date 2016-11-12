@@ -1,4 +1,4 @@
-from requirements import *
+from config import *
 
 class Waiter():
 	max_tables = 10

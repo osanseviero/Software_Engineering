@@ -1,11 +1,4 @@
-import helper
-
-from pymongo import MongoClient
-from passlib.hash import sha256_crypt
-from blessings import Terminal
-client = MongoClient()
-db = client.test_database	
-t = Terminal()
+from config import *
 
 class Chef():
 	def __init__(self):

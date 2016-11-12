@@ -1,4 +1,4 @@
-from requirements import *
+from config import *
 
 class Table():
 	def __init__(self, table):
