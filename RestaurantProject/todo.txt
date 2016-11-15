@@ -9,3 +9,4 @@ CURRENT: list tables in the admin interface and remove it from table
 3. Table should only accept order if there is people registered in it.
 4. Improve interface
 5. Allow waiter to print food or drinks
+6. Menu CRUD
