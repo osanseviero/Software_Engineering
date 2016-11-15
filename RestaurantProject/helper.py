@@ -6,6 +6,12 @@ def getWorkers():
 def getRecipes():
 	return db.recipes 
 
+def newRecipe(name, price, type):
+	'''Creates a recipe document and saves it to the recipes collection'''
+	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type}
+	getRecipes().insert(newRecipe)
+	print "Created recipe for: " , t.bold(name)
+
 def getTables():
 	return db.tables
 

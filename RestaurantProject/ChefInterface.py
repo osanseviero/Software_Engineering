@@ -5,12 +5,6 @@ class Chef():
 		helper.clearWindow()
 		self.recipesInterface()
 
-	def newRecipe(self, name, price):
-		'''Creates a recipe document and saves it to the recipes collection'''
-		newRecipe = {"name" : name, "price" : price, "pop" : 0}
-		helper.getRecipes().insert(newRecipe)
-		print "Created recipe for: " , t.bold(name)
-
 	def createRecipe(self):
 		'''Asks the input to create the recipe and validates it.'''
 		anotherRecipe = True
@@ -21,7 +15,7 @@ class Chef():
 			if(checkRecipe != None):
 				print "Sorry, a recipe with this name is already in the database"
 			else:
-				self.newRecipe(name, price)
+				helper.newRecipe(name, price, "food")
 			another = raw_input("Do you want to create another recipe?" + t.bold("[y/n]")).lower()
 			if(another == 'n'):
 				anotherRecipe = False
@@ -69,26 +63,29 @@ class Chef():
 		while(anotherCommand):
 			print "What do you want to do?"
 			print t.blink(t.bold("(1)")), "Create a new recipe"
-			print t.blink(t.bold("(2)")), "Show all recipes"
-			print t.blink(t.bold("(3)")), "Find a recipe by name"
-			print t.blink(t.bold("(4)")), "Generate popularity report"
-			print t.blink(t.red("(5)")), "Delete a recipe by name"
-			print t.blink(t.red("(6)")), "Delete all recipes"
-			print t.blink(t.red("(7)")), "Exit recipes interface"
-			option = input(t.bold("1|2|3|4|5|6|7 "))
+			print t.blink(t.bold("(2)")), "Generate popularity report"
+			print t.blink(t.bold("(3)")), "Show all recipes"
+			print t.blink(t.bold("(4)")), "Find a recipe by name"
+			print t.blink(t.bold("(5)")), "Generate popularity report"
+			print t.blink(t.red("(6)")), "Delete a recipe by name"
+			print t.blink(t.red("(7)")), "Delete all recipes"
+			print t.blink(t.red("(8)")), "Exit recipes interface"
+			option = input(t.bold("1|2|3|4|5|6|7|8 "))
 			if(option == 1):
 				self.createRecipe()
 			elif(option == 2):
-				helper.printRecipes()
+				helper.createMenu()
 			elif(option == 3):
-				self.findRecipeByName()
+				helper.printRecipes()
 			elif(option == 4):
-				self.generatePopularyReport()
+				self.findRecipeByName()
 			elif(option == 5):
-				self.deleteByName()
+				self.generatePopularyReport()
 			elif(option == 6):
-				self.clearRecipes()
+				self.deleteByName()
 			elif(option == 7):
+				self.clearRecipes()
+			elif(option == 8):
 				anotherCommand = False
 			else:
 				self.clearWindow()

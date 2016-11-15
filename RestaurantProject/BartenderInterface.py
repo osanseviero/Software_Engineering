@@ -5,12 +5,6 @@ class Chef():
 		helper.clearWindow()
 		self.recipesInterface()
 
-	def newRecipe(self, name, price):
-		'''Creates a recipe document and saves it to the recipes collection'''
-		newRecipe = {"name" : name, "price" : price, "pop" : 0}
-		helper.getRecipes().insert(newRecipe)
-		print "Created drink recipe for: " , t.bold(name)
-
 	def createRecipe(self):
 		'''Asks the input to create the recipe and validates it.'''
 		anotherRecipe = True
@@ -21,7 +15,7 @@ class Chef():
 			if(checkRecipe != None):
 				print "Sorry, a drink recipe with this name is already in the database"
 			else:
-				self.newRecipe(name, price)
+				helper.newRecipe(name, price, "drink")
 			another = raw_input("Do you want to create another drink?" + t.bold("[y/n]")).lower()
 			if(another == 'n'):
 				anotherRecipe = False

@@ -1,8 +1,9 @@
 from config import *
 
 class Admin:
-	'''API to interact with workers.
-		This is just a test, some of this functions are for the login system and admin.
+	'''
+		Admin interface
+		Allows to create users, generate reporters, and table creation.
 	'''
 
 	def __init__(self, collection):
