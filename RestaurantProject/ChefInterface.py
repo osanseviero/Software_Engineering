@@ -56,9 +56,48 @@ class Chef():
 		for recipe in helper.getRecipes().find():
 			print recipe['name'] , recipe['pop']
 
+	def createMenuTime(self, time):
+		'''Generate an array with products'''
+		helper.printRecipes()
+		dishes = []
+		product = ''
+		print t.bold("Enter products for " + time)
+		while(product != 'e' and product != 's'):
+			product = raw_input("What's the name of the product for first dish? Press s to save. Press e to exit. ").lower()
+			if product != 'e' and product != 's':
+				recipe = helper.findRecipe(product)
+				if recipe == None:
+					print t.red("Recipe was not found")
+				else:
+					print recipe['name'], " was added to the order."
+					dishes.append(recipe['_id'])
+					print "Current order: "
+					for dish in dishes:
+						print helper.findRecipeById(dish)
+		if product == 's':
+			return dishes
+		else:
+			return None
+
 	def createMenu(self):
 		'''Generate the menu'''
-		print "Will generate the menu"
+		helper.clearWindow()
+
+		firstDishes = []
+		secondDishes = []
+		desserts = []
+
+		name = raw_input("What's the name of the menu?").lower()
+		disc = input("What's discount is going to be given in this menu?")	
+
+		firstDishes = self.createMenuTime("first dish")
+		secondDishes = self.createMenuTime("second dish")
+		desserts = self.createMenuTime("dessert")
+
+		newMenu = {"name" : name, "disc" : disc, "pop" : 0, "first" : firstDishes, "second" : secondDishes, "desserts" : desserts}
+
+		helper.getMenus().insert(newMenu)
+		print "Menu saved"
 
 	def recipesInterface(self):
 		'''Main interface to manage recipes'''
