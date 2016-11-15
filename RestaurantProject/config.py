@@ -14,3 +14,4 @@ import ChefInterface
 import order
 import Table
 import WaiterInterface
+import BartenderInterface

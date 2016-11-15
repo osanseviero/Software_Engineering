@@ -28,6 +28,8 @@ class System:
 						ChefInterface.Chef()
 					elif(userType == 3):
 						WaiterInterface.Waiter()
+					elif(userType == 4):
+						BartenderInterface.Bartender()
 				else:
 					print "Wrong password"
 
