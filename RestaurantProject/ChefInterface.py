@@ -56,6 +56,9 @@ class Chef():
 		for recipe in helper.getRecipes().find():
 			print recipe['name'] , recipe['pop']
 
+	def createMenu(self):
+		'''Generate the menu'''
+		print "Will generate the menu"
 
 	def recipesInterface(self):
 		'''Main interface to manage recipes'''
@@ -63,18 +66,18 @@ class Chef():
 		while(anotherCommand):
 			print "What do you want to do?"
 			print t.blink(t.bold("(1)")), "Create a new recipe"
-			print t.blink(t.bold("(2)")), "Generate popularity report"
+			print t.blink(t.bold("(2)")), "Create a new menu"
 			print t.blink(t.bold("(3)")), "Show all recipes"
 			print t.blink(t.bold("(4)")), "Find a recipe by name"
 			print t.blink(t.bold("(5)")), "Generate popularity report"
 			print t.blink(t.red("(6)")), "Delete a recipe by name"
 			print t.blink(t.red("(7)")), "Delete all recipes"
-			print t.blink(t.red("(8)")), "Exit recipes interface"
+			print t.blink(t.red("(8)")), "Exit chef interface"
 			option = input(t.bold("1|2|3|4|5|6|7|8 "))
 			if(option == 1):
 				self.createRecipe()
 			elif(option == 2):
-				helper.createMenu()
+				self.createMenu()
 			elif(option == 3):
 				helper.printRecipes()
 			elif(option == 4):

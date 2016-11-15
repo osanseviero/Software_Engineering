@@ -3,8 +3,6 @@ from config import *
 class System:
 	''' Class to manage the whole system'''
 
-	userLogged = False
-
 	def __init__(self):
 		helper.clearWindow()
 		print t.underline("Welcome to the restaurant")

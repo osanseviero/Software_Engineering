@@ -1,5 +1,5 @@
 Python 2.7.10
-Mongod 3.2.1 	(run a mongo instance with mongod in another terminal)
+Mongod 3.2.1 
 
 Python Packages
 	- pymongo
