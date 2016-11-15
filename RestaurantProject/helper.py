@@ -6,14 +6,17 @@ def getWorkers():
 def getRecipes():
 	return db.recipes 
 
+def getMenus():
+	return db.menu
+
+def getTables():
+	return db.tables
+
 def newRecipe(name, price, type):
 	'''Creates a recipe document and saves it to the recipes collection'''
 	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type}
 	getRecipes().insert(newRecipe)
 	print "Created recipe for: " , t.bold(name)
-
-def getTables():
-	return db.tables
 
 def clearWindow():
 	'''Clears the console window'''
@@ -28,6 +31,10 @@ def printRecipes():
 		print t.bold("List of Recipes")
 		for recipe in getRecipes().find():
 			print "Recipe " , recipe['name'], " cost: "  , recipe['price']
+
+def findRecipeById(id):
+	'''Finds a recipe. Returns None if not found'''
+	return getRecipes().find_one({"_id": id})
 
 def findRecipe(name):
 	'''Finds a recipe. Returns None if not found'''
