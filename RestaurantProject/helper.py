@@ -26,8 +26,19 @@ def printRecipes():
 		print "There are no recipes"
 	else:
 		print t.bold("List of Recipes")
-		for recipe in getRecipes().find():
+		for recipe in getRecipes().find({"type":"food"}):
 			print "Recipe " , recipe['name'], " cost: "  , recipe['price']
+
+def printDrinks():
+	'''Prints all the drinks in document format'''
+	clearWindow()
+	if(getRecipes().count() == 0):
+		print "There are no recipes"
+	else:
+		print t.bold("List of Drinks")
+		for recipe in getRecipes().find({"type":"drink"}):
+				print "Drink " , recipe['name'], " cost: "  , recipe['price']
+
 
 def findRecipe(name):
 	'''Finds a recipe. Returns None if not found'''
