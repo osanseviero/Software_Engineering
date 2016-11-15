@@ -1,6 +1,6 @@
 from config import *
 
-class Chef():
+class Bartender():
 	def __init__(self):
 		helper.clearWindow()
 		self.recipesInterface()
@@ -21,7 +21,7 @@ class Chef():
 				anotherRecipe = False
 				helper.clearWindow()
 
-	def clearRecipes(self):
+	def clearDrinks(self):
 		'''Erases all the recipes'''
 		sure = raw_input(t.red("Are you sure you want to erase all your recipes?") + t.bold("[y/n]")).lower()
 		if(sure == 'y'):
@@ -73,7 +73,7 @@ class Chef():
 			if(option == 1):
 				self.createRecipe()
 			elif(option == 2):
-				helper.printRecipes()
+				helper.printDrinks()
 			elif(option == 3):
 				self.findRecipeByName()
 			elif(option == 4):
@@ -81,7 +81,7 @@ class Chef():
 			elif(option == 5):
 				self.deleteByName()
 			elif(option == 6):
-				self.clearRecipes()
+				self.clearDinks()
 			elif(option == 7):
 				anotherCommand = False
 			else:
