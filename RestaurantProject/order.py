@@ -1,11 +1,11 @@
 from config import *	
 
-def printRecipes():
+"""def printRecipes():
 	helper.printRecipes()
+def printDrinks():
+	helper.printDrinks()"""
 
 def selectRecipe(tableId):
-	helper.clearWindow()
-	printRecipes()
 	name = ''
 	order = []
 	while(name != 'e'):
@@ -26,19 +26,37 @@ def selectRecipe(tableId):
 				print "Current order: "
 				print order
 
+
+"""def selectDrink(tableId):
+	helper.clearWindow()
+	helper.printDrinks()
+	selectRecipe(tableId)
+
+
+def selectDish(tableId):
+	helper.clearWindow()
+	printRecipes()
+	selectRecipe(tableId)"""
+
+
+
 def newOrder(tableId):
 	helper.clearWindow()
 	print "Register the new order"
 	anotherCommand = True
 	while(anotherCommand):
 		print "What do you want to do?"
-		print t.blink(t.bold("(1)")), "Print all the products with their respective price."
-		print t.blink(t.bold("(2)")), "Select a product."
+		print t.blink(t.bold("(1)")), "Select dishes."
+		print t.blink(t.bold("(2)")), "Select drinks."
 		print t.blink(t.bold("(3)")), "Exit order interface"
 		option = input(t.bold("1|2|3 "))
 		if(option == 1):
-			printRecipes()
+			helper.clearWindow()
+			helper.printRecipes()
+			selectRecipe(tableId)
 		elif(option == 2):
+			helper.clearWindow()
+			helper.printDrinks()
 			selectRecipe(tableId)
 		elif(option == 3):
 			anotherCommand = False

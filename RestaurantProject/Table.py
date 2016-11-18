@@ -27,8 +27,8 @@ class Table():
 			print t.blink(t.bold("(1)")), "Register new people"
 			print t.blink(t.bold("(2)")), "Register new order"
 			print t.blink(t.bold("(3)")), "Change order"
-			print t.blink(t.bold("(4)")), "Get account"
-			print t.blink(t.bold("(4)")), "Close account."
+			print t.blink(t.bold("(4)")), "Get check"
+			print t.blink(t.bold("(4)")), "Close check"
 			print t.blink(t.red("(6)")), "Exit order interface"
 			option = input(t.bold("1|2|3|4|5|6 "))
 			if(option == 1):

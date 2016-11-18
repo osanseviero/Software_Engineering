@@ -35,22 +35,19 @@ class Waiter():
 			print "What do you want to do?"
 			print t.blink(t.bold("(1)")), "List all recipes"
 			print t.blink(t.bold("(2)")), "List all drinks"
-			print t.blink(t.bold("(3)")), "Create new table (to edit: this can only be done by admin)"
-			print t.blink(t.bold("(4)")), "List all tables"
-			print t.blink(t.bold("(5)")), "Select table"
-			print t.blink(t.red("(6)")), "Exit waiter interface"
-			option = input(t.bold("1|2|3|4|5|6 "))
+			print t.blink(t.bold("(3)")), "List all tables"
+			print t.blink(t.bold("(4)")), "Select table"
+			print t.blink(t.red("(5)")), "Exit waiter interface"
+			option = input(t.bold("1|2|3|4|5 "))
 			if(option == 1):
 				helper.printRecipes()
 			elif(option == 2):
 				helper.printDrinks()
-			elif(option ==3):
-				self.createTable()
-			elif(option == 4):
+			elif(option == 3):
 				self.printTables()
-			elif(option == 5):
+			elif(option == 4):
 				self.selectTable()
-			elif(option == 6):
+			elif(option == 5):
 				anotherCommand = False
 			else:
 				helper.clearWindow()
