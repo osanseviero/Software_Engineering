@@ -39,6 +39,10 @@ def selectDish(tableId):
 	selectRecipe(tableId)"""
 
 
+def update(tableId)
+{
+	print "Que pashon"		
+}
 
 def newOrder(tableId):
 	helper.clearWindow()
