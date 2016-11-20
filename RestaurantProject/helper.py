@@ -62,6 +62,13 @@ def printIngredients():
 				print "Ingredient: " , ingredient['name'], " cost: "  , ingredient['price'], " quantity: ", ingredient['quantity']
 
 
+def isUser(name):
+	'''finds if theres a user with such name'''
+	if(getWorkers().find_one({"name": name})):
+		return 1
+	else:
+		return None
+
 def findRecipeById(id):
 	'''Finds a recipe. Returns None if not found'''
 	return getRecipes().find_one({"_id": id})

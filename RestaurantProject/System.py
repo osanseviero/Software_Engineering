@@ -13,8 +13,13 @@ class System:
 		workers = db.workers
 		while anotherCommand:
 			username = raw_input(t.bold("Which is the username?(q for quit) "))
-			if username == 'q':
+
+			if(helper.isUser(username) == None):
+				print "Sorry there's no user with that name, try another one"
+				
+			elif username == 'q':
 				anotherCommand = False
+
 			else:
 				password = getpass('Enter your password: ')
 				if helper.checkPassword(username, password):
@@ -31,6 +36,7 @@ class System:
 						WarehouseInterface.Warehouse()
 				else:
 					print "Wrong password"
+
 
 a = System()
 a.logInUser()
