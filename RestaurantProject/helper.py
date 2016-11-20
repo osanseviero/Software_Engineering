@@ -26,7 +26,7 @@ def newIngredient(name, price, quantity):
 	'''Creates a recipe document and saves it to the recipes collection'''
 	newIngredient = {"name" : name, "price" : price, "pop" : 0, "quantity" : quantity}
 	getIngredients().insert(newIngredient)
-	print " Added  : " , t.bold(quantity), t.bold(name)
+	print " Added  : " , t.bold(name), " to the database."
 
 def clearWindow():
 	'''Clears the console window'''
@@ -59,7 +59,7 @@ def printIngredients():
 	else:
 		print t.bold("List of Ingredients")
 		for ingredient in getIngredients().find():
-				print "Ingredient " , ingredient['name'], " cost: "  , ingredient['price'], " quantity: ", ingredient['quantity']
+				print "Ingredient: " , ingredient['name'], " cost: "  , ingredient['price'], " quantity: ", ingredient['quantity']
 
 
 def findRecipeById(id):
