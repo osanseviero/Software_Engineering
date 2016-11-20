@@ -14,11 +14,11 @@ class System:
 		while anotherCommand:
 			username = raw_input(t.bold("Which is the username?(q for quit) "))
 
-			if(helper.isUser(username) == None):
-				print "Sorry there's no user with that name, try another one"
-				
-			elif username == 'q':
+			if username == 'q':
 				anotherCommand = False
+
+			elif(helper.isUser(username) == None):
+				print "Sorry there's no user with that name, try another one"
 
 			else:
 				password = getpass('Enter your password: ')
