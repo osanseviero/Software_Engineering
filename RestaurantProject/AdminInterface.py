@@ -25,7 +25,7 @@ class Admin:
 		salary = int(raw_input(t.bold("Which is the salary? ")))
 		password = getpass('Enter your password: ')
 		print "Which is the type of user?"
-		userType = raw_input(t.bold("(1)Admin (2)Chef (3) Waiter (4)Bartender"))
+		userType = raw_input(t.bold("(1)Admin (2)Chef (3) Waiter (4)Bartender (5)Warehouse"))
 		self.createUser(username, name, lastName, password, salary, userType)		
 
 	def count(self):

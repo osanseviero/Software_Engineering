@@ -6,7 +6,6 @@ class Warehouse():
 		helper.clearWindow()
 		self.interface()
 
-
 	def addIngredient(self):
 		anotherIngredient = True
 		while(anotherIngredient):
@@ -15,13 +14,13 @@ class Warehouse():
 			quantity  = raw_input("What's the quantity? ").lower()
 			checkIngredient = helper.findIngredient(name)
 			if(checkIngredient != None):
-				print "se debe agregar la cantidad al ingrediente"
+				print "The ingredient already exists"
 				"""db.ingredients.update_one({'_id' : checkIngredient['_id']},{'$inc': {'quantity' :1}}, upsert = False, multi = False)"""
 			else:
 				helper.newIngredient(name, price, quantity)
 			another = raw_input("Do you want to add another ingredient?" + t.bold("[y/n]")).lower()
 			if(another == 'n'):
-				anotherRecipe = False
+				anotherIngredient = False
 				helper.clearWindow()
 
 	def interface(self):
