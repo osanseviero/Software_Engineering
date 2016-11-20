@@ -1,10 +1,5 @@
 from config import *	
 
-"""def printRecipes():
-	helper.printRecipes()
-def printDrinks():
-	helper.printDrinks()"""
-
 def selectRecipe(tableId):
 	name = ''
 	order = []
@@ -25,19 +20,6 @@ def selectRecipe(tableId):
 				order.append(recipe)
 				print "Current order: "
 				print order
-
-
-"""def selectDrink(tableId):
-	helper.clearWindow()
-	helper.printDrinks()
-	selectRecipe(tableId)
-
-
-def selectDish(tableId):
-	helper.clearWindow()
-	printRecipes()
-	selectRecipe(tableId)"""
-
 
 def updateOrder(tableId):
 	print "Que pashon"		

@@ -27,6 +27,8 @@ class System:
 						WaiterInterface.Waiter()
 					elif(userType == 4):
 						BartenderInterface.Bartender()
+					elif(userType == 5):
+						WarehouseInterface.Warehouse()
 				else:
 					print "Wrong password"
 
