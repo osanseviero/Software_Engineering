@@ -16,6 +16,7 @@ class Warehouse():
 			checkIngredient = helper.findIngredient(name)
 			if(checkIngredient != None):
 				print "se debe agregar la cantidad al ingrediente"
+				"""db.ingredients.update_one({'_id' : checkIngredient['_id']},{'$inc': {'quantity' :1}}, upsert = False, multi = False)"""
 			else:
 				helper.newIngredient(name, price, quantity)
 			another = raw_input("Do you want to add another ingredient?" + t.bold("[y/n]")).lower()
