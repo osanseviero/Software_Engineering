@@ -15,3 +15,4 @@ import order
 import Table
 import WaiterInterface
 import BartenderInterface
+import WarehouseInterface
