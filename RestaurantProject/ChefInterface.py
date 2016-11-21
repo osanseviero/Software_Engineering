@@ -17,7 +17,8 @@ class Chef():
 				price = 0
 				helper.printStoredIngredients()
 				ingredients = helper.selectIngredients()
-				for ingredient in ingredients:
+				for ingredientId in ingredients:
+					ingredient = helper.findIngredientById(ingredientId)
 					price += int(ingredient['price'])
 				helper.newRecipe(name, price, "food", ingredients)
 			another = raw_input("Do you want to create another recipe?" + t.bold("[y/n]")).lower()
@@ -122,16 +123,19 @@ class Chef():
 			elif(option == '2'):
 				self.createMenu()
 			elif(option == '3'):
-				helper.printRecipesFull()
+				helper.printRecipes()
 			elif(option == '4'):
 				self.findRecipeByName()
 			elif(option == '5'):
-				self.generatePopularyReport()
+				helper.requestIngredient()
 			elif(option == '6'):
-				self.deleteByName()
+				self.generatePopularyReport()
 			elif(option == '7'):
-				self.clearRecipes()
+				self.deleteByName()
 			elif(option == '8'):
+				self.clearRecipes()
+			elif(option == '9'):
+				helper.clearWindow()
 				anotherCommand = False
 			else:
 				self.clearWindow()

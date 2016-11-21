@@ -19,7 +19,8 @@ class Bartender():
 				price = 0
 				helper.printStoredIngredients()
 				ingredients = helper.selectIngredients()
-				for ingredient in ingredients:
+				for ingredientId in ingredients:
+					ingredient = helper.findIngredientById(ingredientId)
 					price += int(ingredient['price'])
 				helper.newRecipe(name, price, "drink", ingredients)
 			another = raw_input("Do you want to create another drink?" + t.bold("[y/n]")).lower()
@@ -77,10 +78,11 @@ class Bartender():
 			print t.blink(t.bold("(1)")), "Create a new drink"
 			print t.blink(t.bold("(2)")), "Show all drinks"
 			print t.blink(t.bold("(3)")), "Find a drink by name"
-			print t.blink(t.bold("(4)")), "Generate popularity report"
-			print t.blink(t.red("(5)")), "Delete a drink by name"
-			print t.blink(t.red("(6)")), "Delete all drink"
-			print t.blink(t.red("(7)")), "Exit drink interface"
+			print t.blink(t.bold("(4)")), "Make ingredient request"
+			print t.blink(t.bold("(5)")), "Generate popularity report"
+			print t.blink(t.red("(6)")), "Delete a drink by name"
+			print t.blink(t.red("(7)")), "Delete all drink"
+			print t.blink(t.red("(8)")), "Exit drink interface"
 			option = raw_input(t.bold("1|2|3|4|5|6|7 "))
 			if option == '1':
 				self.createRecipe()
@@ -89,12 +91,14 @@ class Bartender():
 			elif option == '3':
 				self.findRecipeByName()
 			elif option == '4':
-				self.generatePopularyReport()
+				helper.requestIngredient()
 			elif option == '5':
-				self.deleteByName()
+				self.generatePopularyReport()
 			elif option == '6':
-				self.clearDrinks()
+				self.deleteByName()
 			elif option == '7':
+				self.clearDrinks()
+			elif option == '8':
 				anotherCommand = False
 			else:
 				helper.clearWindow()
