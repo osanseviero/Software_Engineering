@@ -67,7 +67,7 @@ def printDrinks():
 	'''Prints all the drinks in document format'''
 	clearWindow()
 	if(getRecipes().count() == 0):
-		print "There are no recipes"
+		print "There are no drinks"
 	else:
 		print t.bold("List of Drinks")
 		for recipe in getRecipes().find({"type":"drink"}):

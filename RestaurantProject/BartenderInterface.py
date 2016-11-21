@@ -12,7 +12,9 @@ class Bartender():
 			name = raw_input("What's the name of the drink? ").lower()
 			price = raw_input("What's the price of the drink? ").lower()
 			checkRecipe = helper.findRecipe(name)
-			if(checkRecipe != None):
+			if(name == '' or price == ''):
+				print "Sorry, we're missing important information about the drink, try again"
+			elif(checkRecipe != None):
 				print "Sorry, a drink recipe with this name is already in the database"
 			else:
 				helper.newRecipe(name, price, "drink")
@@ -23,11 +25,16 @@ class Bartender():
 
 	def clearDrinks(self):
 		'''Erases all the recipes'''
-		sure = raw_input(t.red("Are you sure you want to erase all your recipes?") + t.bold("[y/n]")).lower()
-		if(sure == 'y'):
-			db.drop_collection(helper.getRecipes())
-		helper.clearWindow()
-		print "All your recipes were erased"
+		sure = raw_input(t.red("Are you sure you want to erase all your drinks?") + t.bold("[y/n]")).lower()
+		if(sure == 'n'):
+			helper.clearWindow()
+		elif(sure != 'y'):
+			helper.clearWindow()
+			print "Sorry, I didn't understand, please write [y/n]"
+		elif(sure == 'y'):
+			helper.getRecipes().remove({"type": "drink"})
+			helper.clearWindow()
+			print "All your drinks were erased"
 
 	def findRecipeByName(self):
 		'''Finds a recipe given a name.'''
@@ -52,6 +59,7 @@ class Bartender():
 
 	def generatePopularyReport(self):
 		'''Lists all the recipes with their respective popularity'''
+		helper.clearWindow()
 		print t.bold("Name") , t.bold("Popularity")
 		for recipe in helper.getRecipes().find():
 			print recipe['name'] , recipe['pop']
