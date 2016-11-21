@@ -11,6 +11,13 @@ class Warehouse():
 		while(anotherIngredient):
 			name = raw_input("What's the name of the ingredient? ").lower()
 			price = raw_input("What's the price of the ingredient? ").lower()
+			if(name == '' or price == ''):
+				helper.clearWindow()
+				print "Sorry, important information on the ingredient is missing, try again"
+				break
+			elif(price.isalpha()):
+				print "Make sure you're using numbers in the price, try again"
+				break
 			checkIngredient = helper.findIngredient(name)
 			if(checkIngredient != None):
 				print "The ingredient already exists"
@@ -25,11 +32,16 @@ class Warehouse():
 		name = raw_input("What's the name of the ingredient? ").lower()
 		ingredient = helper.findIngredient(name)
 		if(ingredient == None):
+			helper.clearWindow()
 			print "Sorry, this ingredient does not exist"
 		else:
 			print "Previous price is: " , ingredient['price']
 			price = raw_input("What's the price of the ingredient? ").lower()
-			helper.getIngredients().update({"name" : ingredient['name'] },{ '$set': {"price": str(price)}})
+			if(price.isalpha() or price == ''):
+				helper.clearWindow()
+				print "Make sure you're using numbers in the price, try again"
+			else:
+				helper.getIngredients().update({"name" : ingredient['name'] },{ '$set': {"price": str(price)}})
 
 	def clearIngredients(self):
 		db.drop_collection(helper.getIngredients())
