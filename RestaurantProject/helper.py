@@ -18,6 +18,9 @@ def getIngredients():
 def getStoredIngredients():
 	return db.storedIngredients
 
+def getKitchenIngredients():
+	return db.kitchenIngredients
+
 def newRecipe(name, price, type, ingredients):
 	'''Creates a recipe document and saves it to the recipes collection'''
 	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type, "ingredients" : ingredients}
@@ -41,16 +44,6 @@ def clearWindow():
 	os.system('cls' if os.name == 'nt' else 'clear')
 
 def printRecipes():
-	'''Prints all the recipes in document format'''
-	clearWindow()
-	if(getRecipes().count() == 0):
-		print "There are no recipes"
-	else:
-		print t.bold("List of Recipes")
-		for recipe in getRecipes().find({"type":"food"}):
-			print "Recipe " , recipe['name'], " cost: "  , recipe['price']
-
-def printRecipesFull():
 	'''Prints all the recipes in full format, including every ingredient it has'''
 	clearWindow()
 	if(getRecipes().count() == 0):
@@ -59,7 +52,8 @@ def printRecipesFull():
 		print t.bold("List of Recipes")
 		for recipe in getRecipes().find({"type":"food"}):
 			print "Recipe " , recipe['name'], " cost: "  , recipe['price']
-			for ingredient in recipe['ingredients']:
+			for ingredientId in recipe['ingredients']:
+				ingredient = findIngredientById(ingredientId)
 				print "\tIngredient: " , ingredient['name'], " popularity: ", ingredient['pop']
 
 def printDrinks():
@@ -70,7 +64,10 @@ def printDrinks():
 	else:
 		print t.bold("List of Drinks")
 		for recipe in getRecipes().find({"type":"drink"}):
-				print "Drink " , recipe['name'], " cost: "  , recipe['price']
+			print "Drink " , recipe['name'], " cost: "  , recipe['price']
+			for ingredientId in recipe['ingredients']:
+				ingredient = findIngredientById(ingredientId)
+				print "\tIngredient: " , ingredient['name'], " popularity: ", ingredient['pop']
 
 def printIngredients():
 	clearWindow()
@@ -128,17 +125,26 @@ def getMaxTables():
 	return 10
 
 def selectIngredients():
-		name = ''
-		order = []
-		while(True):
-			name = raw_input("What's the name of the ingredient? Press s to save. ").lower()
-			if(name == 's'):
-				print order , " was added to the product"
-				return order
+	'''Propmts the user to select ingredients and returns an array of ingredient ids'''
+	name = ''
+	order = []
+	while(True):
+		name = raw_input("What's the name of the ingredient? Press s to save. ").lower()
+		if(name == 's'):
+			print order , " was added to the product"
+			return order
 
-			ingredient = findIngredient(name)
-			if ingredient == None:
-				print t.red("Ingredient was not found")
-			else:
-				order.append(ingredient)
-				print ingredient['name'] + ' was added to the product'
+		ingredient = findIngredient(name)
+		if ingredient == None:
+			print t.red("Ingredient was not found")
+		else:
+			print ingredient['name'] + ' was added to the product'
+			order.append(ingredient['_id'])
+
+def requestIngredients():
+	print 'hello'
+
+
+
+
+
