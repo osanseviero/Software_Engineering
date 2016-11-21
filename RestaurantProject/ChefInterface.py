@@ -116,22 +116,22 @@ class Chef():
 			print t.blink(t.red("(6)")), "Delete a recipe by name"
 			print t.blink(t.red("(7)")), "Delete all recipes"
 			print t.blink(t.red("(8)")), "Exit chef interface"
-			option = input(t.bold("1|2|3|4|5|6|7|8 "))
-			if(option == 1):
+			option = raw_input(t.bold("1|2|3|4|5|6|7|8 "))
+			if(option == '1'):
 				self.createRecipe()
-			elif(option == 2):
+			elif(option == '2'):
 				self.createMenu()
-			elif(option == 3):
+			elif(option == '3'):
 				helper.printRecipesFull()
-			elif(option == 4):
+			elif(option == '4'):
 				self.findRecipeByName()
-			elif(option == 5):
+			elif(option == '5'):
 				self.generatePopularyReport()
-			elif(option == 6):
+			elif(option == '6'):
 				self.deleteByName()
-			elif(option == 7):
+			elif(option == '7'):
 				self.clearRecipes()
-			elif(option == 8):
+			elif(option == '8'):
 				anotherCommand = False
 			else:
 				self.clearWindow()
