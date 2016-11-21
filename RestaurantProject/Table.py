@@ -18,7 +18,7 @@ class Table():
 			helper.getTables().update({"_id" : self.table['_id'] },{'$set' : {"numPeople": option}})
 			print "Registered the people"
 
-	def interface(self):
+	def withPeople(self):
 		helper.clearWindow()
 		print "Table interface of table " + str(self.table["num"])
 		anotherCommand = True
@@ -38,9 +38,36 @@ class Table():
 			elif(option == '3'):
 				order.update(self.table['_id'])
 			elif(option == '6'):
+				helper.clearWindow()
 				anotherCommand = False
 			else:
 				helper.clearWindow()
 				print "I did not understand you. Please just write the number"
+
+	def withoutPeople(self):
+		helper.clearWindow()
+		print "Table interface of table " + str(self.table["num"])
+		anotherCommand = True
+		while(anotherCommand):
+			print "What do you want to do?"
+			print t.blink(t.bold("(1)")), "Register new people"
+			print t.blink(t.red("(2)")), "Exit order interface"
+			option = raw_input(t.bold("1|2"))
+			if(option == '1'):
+				self.registerPeople()
+			elif(option == '2'):
+				helper.clearWindow()
+				anotherCommand = False
+			else:
+				helper.clearWindow()
+				print "I did not understand you. Please just write the number"
+
+	'''def interfaceWithoutPeople(self):'''
+
+	def interface(self):
+		if(self.table["numPeople"] > 0):
+			self.withPeople()
+		else:
+			self.withoutPeople()
 
 
