@@ -19,9 +19,9 @@ def getStoredIngredients():
 	return db.storedIngredients
 
 
-def newRecipe(name, price, type):
+def newRecipe(name, price, type, ingredients):
 	'''Creates a recipe document and saves it to the recipes collection'''
-	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type}
+	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type, "ingredients" : ingredients}
 	getRecipes().insert(newRecipe)
 	print "Created recipe for: " , t.bold(name)
 
@@ -50,6 +50,18 @@ def printRecipes():
 		print t.bold("List of Recipes")
 		for recipe in getRecipes().find({"type":"food"}):
 			print "Recipe " , recipe['name'], " cost: "  , recipe['price']
+
+def printRecipesFull():
+	'''Prints all the recipes in full format, including every ingredient it has'''
+	clearWindow()
+	if(getRecipes().count() == 0):
+		print "There are no recipes"
+	else:
+		print t.bold("List of Recipes")
+		for recipe in getRecipes().find({"type":"food"}):
+			print "Recipe " , recipe['name'], " cost: "  , recipe['price']
+			for ingredient in recipe['ingredients']:
+				print "\tIngredient: " , ingredient['name'], " cost: "  , ingredient['price'], " popularity: ", ingredient['pop']
 
 def printDrinks():
 	'''Prints all the drinks in document format'''

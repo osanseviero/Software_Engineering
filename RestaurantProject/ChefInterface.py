@@ -5,6 +5,23 @@ class Chef():
 		helper.clearWindow()
 		self.recipesInterface()
 
+	def selectIngredients(self):
+		helper.printStoredIngredients()
+		name = ''
+		order = []
+		while(True):
+			name = raw_input("What's the name of the ingredient? Press s to save. ").lower()
+			if(name == 's'):
+				print order , " was added to the product"
+				return order
+
+			ingredient = helper.findIngredient(name)
+			if ingredient == None:
+				print t.red("Ingredient was not found")
+			else:
+				order.append(ingredient)
+				print ingredient['name'] + ' was added to the product'
+
 	def createRecipe(self):
 		'''Asks the input to create the recipe and validates it.'''
 		anotherRecipe = True
@@ -15,7 +32,8 @@ class Chef():
 			if(checkRecipe != None):
 				print "Sorry, a recipe with this name is already in the database"
 			else:
-				helper.newRecipe(name, price, "food")
+				ingredients = self.selectIngredients()
+				helper.newRecipe(name, price, "food", ingredients)
 			another = raw_input("Do you want to create another recipe?" + t.bold("[y/n]")).lower()
 			if(another == 'n'):
 				anotherRecipe = False
@@ -118,7 +136,7 @@ class Chef():
 			elif(option == 2):
 				self.createMenu()
 			elif(option == 3):
-				helper.printRecipes()
+				helper.printRecipesFull()
 			elif(option == 4):
 				self.findRecipeByName()
 			elif(option == 5):
