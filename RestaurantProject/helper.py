@@ -18,7 +18,6 @@ def getIngredients():
 def getStoredIngredients():
 	return db.storedIngredients
 
-
 def newRecipe(name, price, type, ingredients):
 	'''Creates a recipe document and saves it to the recipes collection'''
 	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type, "ingredients" : ingredients}
@@ -61,7 +60,7 @@ def printRecipesFull():
 		for recipe in getRecipes().find({"type":"food"}):
 			print "Recipe " , recipe['name'], " cost: "  , recipe['price']
 			for ingredient in recipe['ingredients']:
-				print "\tIngredient: " , ingredient['name'], " cost: "  , ingredient['price'], " popularity: ", ingredient['pop']
+				print "\tIngredient: " , ingredient['name'], " popularity: ", ingredient['pop']
 
 def printDrinks():
 	'''Prints all the drinks in document format'''
@@ -127,3 +126,19 @@ def checkPassword(username, password):
 
 def getMaxTables():
 	return 10
+
+def selectIngredients():
+		name = ''
+		order = []
+		while(True):
+			name = raw_input("What's the name of the ingredient? Press s to save. ").lower()
+			if(name == 's'):
+				print order , " was added to the product"
+				return order
+
+			ingredient = findIngredient(name)
+			if ingredient == None:
+				print t.red("Ingredient was not found")
+			else:
+				order.append(ingredient)
+				print ingredient['name'] + ' was added to the product'

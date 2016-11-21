@@ -10,14 +10,18 @@ class Bartender():
 		anotherRecipe = True
 		while(anotherRecipe):
 			name = raw_input("What's the name of the drink? ").lower()
-			price = raw_input("What's the price of the drink? ").lower()
 			checkRecipe = helper.findRecipe(name)
-			if(name == '' or price == ''):
+			if(name == ''):
 				print "Sorry, we're missing important information about the drink, try again"
 			elif(checkRecipe != None):
 				print "Sorry, a drink recipe with this name is already in the database"
 			else:
-				helper.newRecipe(name, price, "drink")
+				price = 0
+				helper.printStoredIngredients()
+				ingredients = helper.selectIngredients()
+				for ingredient in ingredients:
+					price += int(ingredient['price'])
+				helper.newRecipe(name, price, "drink", ingredients)
 			another = raw_input("Do you want to create another drink?" + t.bold("[y/n]")).lower()
 			if(another == 'n'):
 				anotherRecipe = False

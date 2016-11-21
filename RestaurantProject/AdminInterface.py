@@ -29,7 +29,7 @@ class Admin:
 		salary = raw_input(t.bold("Which is the salary? "))
 		password = getpass('Enter your password: ')
 		print "Which is the type of user?"
-		userType = raw_input(t.bold("(1)Admin (2)Chef (3) Waiter (4)Bartender (5) Warehouse Worker (6)Warehouse Admin"))
+		userType = raw_input(t.bold("(1)Admin (2)Chef (3) Waiter (4)Bartender (5) Warehouse Worker (6)Warehouse Admin "))
 		if(username == '' or name == '' or salary =='' or password == '' or userType == ''):
 			helper.clearWindow()
 			print "Sorry, we're missing some important information from the new user, try again"
