@@ -15,7 +15,7 @@ class Warehouse():
 			if(checkIngredient != None):
 				print "The ingredient already exists"
 			else:
-				helper.newIngredient(name, price, '0')
+				helper.newIngredient(name, price)
 			another = raw_input("Do you want to add another ingredient?" + t.bold("[y/n]")).lower()
 			if(another == 'n'):
 				anotherIngredient = False
@@ -36,7 +36,7 @@ class Warehouse():
 
 	def interface(self):
 		helper.clearWindow()
-		print "Warehouse interface"
+		print "Warehouse admin interface"
 		anotherCommand = True
 		while(anotherCommand):
 			print "What do you want to do?"

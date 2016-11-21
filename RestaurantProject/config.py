@@ -15,4 +15,5 @@ import order
 import Table
 import WaiterInterface
 import BartenderInterface
+import StorerInterface
 import WarehouseInterface

@@ -15,18 +15,27 @@ def getTables():
 def getIngredients():
 	return db.ingredients
 
+def getStoredIngredients():
+	return db.storedIngredients
+
+
 def newRecipe(name, price, type):
 	'''Creates a recipe document and saves it to the recipes collection'''
 	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type}
 	getRecipes().insert(newRecipe)
 	print "Created recipe for: " , t.bold(name)
 
-
-def newIngredient(name, price, quantity):
-	'''Creates a recipe document and saves it to the recipes collection'''
-	newIngredient = {"name" : name, "price" : price, "pop" : 0, "quantity" : quantity}
+def newIngredient(name, price):
+	'''Creates an ingredient document and saves it to the recipes collection'''
+	newIngredient = {"name" : name, "price" : price, "pop" : 0}
 	getIngredients().insert(newIngredient)
 	print " Added  : " , t.bold(name), " to the database."
+
+def registerIngredient(ingredient_id, quantity, expiration):
+	'''Save an instance of ingredient with an associated quantity and expiration date'''
+	ingredientCopy = {"ingredient_id" : ingredient_id, "quantity" : quantity, "expiration" : expiration}
+	getIngredients().update({"_id" : ingredient_id },{'$inc' : {"pop": quantity}})
+	getStoredIngredients().insert(ingredientCopy)
 
 def clearWindow():
 	'''Clears the console window'''
@@ -59,8 +68,19 @@ def printIngredients():
 	else:
 		print t.bold("List of Ingredients")
 		for ingredient in getIngredients().find():
-				print "Ingredient: " , ingredient['name'], " cost: "  , ingredient['price'], " quantity: ", ingredient['quantity']
+				print "Ingredient: " , ingredient['name'], " cost: "  , ingredient['price'], " popularity: ", ingredient['pop']
 
+def printStoredIngredients():
+	clearWindow()
+	if(getStoredIngredients().count() == 0):
+		print "There are no ingredients stored at warehouse"
+	else:
+		print t.bold("List of Ingredients Stored")
+		for storedIngredient in getStoredIngredients().find():
+			ingredient = findIngredientById(storedIngredient['ingredient_id'])
+			print "Ingredient: " , ingredient['name']
+			print "\t cost: "  , ingredient['price'], " popularity: ", ingredient['pop']	
+			print "\t quantity: "  , storedIngredient['quantity'], " expiration: ", storedIngredient['expiration']	
 
 def isUser(name):
 	'''finds if theres a user with such name'''
@@ -76,6 +96,10 @@ def findRecipeById(id):
 def findRecipe(name):
 	'''Finds a recipe. Returns None if not found'''
 	return getRecipes().find_one({"name": name})
+
+def findIngredientById(id):
+	'''Finds an ingredient by ID. Returns None if not found'''
+	return getIngredients().find_one({"_id": id})
 
 def findIngredient(name):
 	'''Finds a Ingredient. Returns None if not found'''
