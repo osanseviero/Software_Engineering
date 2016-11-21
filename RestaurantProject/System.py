@@ -35,7 +35,7 @@ class System:
 					elif(userType == 5):
 						StorerInterface.Storer()
 					elif(userType == 6):
-						WarehouseInterface.Warehouse()
+
 				else:
 					print "Wrong password"
 
