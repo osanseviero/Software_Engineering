@@ -30,14 +30,14 @@ class Table():
 			print t.blink(t.bold("(4)")), "Get check"
 			print t.blink(t.bold("(5)")), "Close check"
 			print t.blink(t.red("(6)")), "Exit order interface"
-			option = input(t.bold("1|2|3|4|5|6 "))
-			if(option == 1):
+			option = raw_input(t.bold("1|2|3|4|5|6 "))
+			if(option == '1'):
 				self.registerPeople()
-			elif(option == 2):
+			elif(option == '2'):
 				order.newOrder(self.table['_id'])
-			elif(option == 3):
+			elif(option == '3'):
 				order.update(self.table['_id'])
-			elif(option == 6):
+			elif(option == '6'):
 				anotherCommand = False
 			else:
 				helper.clearWindow()

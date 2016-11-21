@@ -69,21 +69,21 @@ class Bartender():
 			print t.blink(t.red("(5)")), "Delete a drink by name"
 			print t.blink(t.red("(6)")), "Delete all drink"
 			print t.blink(t.red("(7)")), "Exit drink interface"
-			option = input(t.bold("1|2|3|4|5|6|7 "))
-			if(option == 1):
+			option = raw_input(t.bold("1|2|3|4|5|6|7 "))
+			if option == '1':
 				self.createRecipe()
-			elif(option == 2):
+			elif option == '2':
 				helper.printDrinks()
-			elif(option == 3):
+			elif option == '3':
 				self.findRecipeByName()
-			elif(option == 4):
+			elif option == '4':
 				self.generatePopularyReport()
-			elif(option == 5):
+			elif option == '5':
 				self.deleteByName()
-			elif(option == 6):
-				self.clearDinks()
-			elif(option == 7):
+			elif option == '6':
+				self.clearDrinks()
+			elif option == '7':
 				anotherCommand = False
 			else:
-				self.clearWindow()
+				helper.clearWindow()
 				print "I did not understand you. Please just write the number"

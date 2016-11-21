@@ -12,9 +12,13 @@ class Admin:
 		self.interface()
 
 	def createUser(self, user, name, lastname, password, salary, userType):
-		newWorker = {"user" : user, "name" : name, "lastname": lastname, "password": sha256_crypt.encrypt(password), "salary" : salary, "type": userType}
-		self.workers.insert(newWorker)
-		print "Saved worker with username " , user
+		if(helper.isUser(name) != None):
+			helper.clearWindow()
+			print "Sorry, this user already exists"
+		else:
+			newWorker = {"user" : user, "name" : name, "lastname": lastname, "password": sha256_crypt.encrypt(password), "salary" : salary, "type": userType}
+			self.workers.insert(newWorker)
+			print "Saved worker with username " , user
 
 	def newUser(self):
 		'''Register a new user in the system'''
@@ -91,18 +95,21 @@ class Admin:
 			print t.blink(t.bold("(4)")), "Clear user database"
 			print t.blink(t.bold("(5)")), "Erase table database"
 			print t.blink(t.red("(6)")), "Exit"
-			option = input(t.bold("1|2|3|4|5|6 "))
-			if option == 1:
+			option = raw_input(t.bold("1|2|3|4|5|6 "))
+			if option == '1':
 				self.newUser()
-			elif option == 2:
+			elif option == '2':
 				self.printWorkers()
-			elif option == 3:
+			elif option == '3':
 				self.createTable()
-			elif option == 4:
+			elif option == '4':
 				self.clearUsers()
-			elif option == 5:
+			elif option == '5':
 				self.clearTables()
-			elif option == 6:
+			elif option == '6':
 				anotherCommand = False
 			else:
+				helper.clearWindow()
 				print "Sorry, I could not understand your command."
+
+
