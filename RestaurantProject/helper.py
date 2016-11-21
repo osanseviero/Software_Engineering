@@ -147,9 +147,10 @@ def selectIngredients():
 
 def printKitchenRequests():
 	'''Shows all the requests from the kitchen'''
-	print "almost"
-	for request in getRequestIngredients():
-		print "Ingredient " , request[0], " in quantity: ", request[1]
+	print "Requests"
+	for requestObject in getRequestIngredients().find():
+		for request in requestObject['request']:
+			print findIngredientById(request[0])['name'] + " quantity: ", request[1]
 
 def requestIngredients():
 	'''Requests a set of ingredients and saves it as tuples of id - quantity'''
@@ -161,15 +162,20 @@ def requestIngredients():
 		if(name == 's'):
 			print order , " was added to the request"
 			getRequestIngredients().insert({'request' : order})
-
-		ingredient = findIngredient(name)
-		if ingredient == None:
-			print t.red("Ingredient was not found")
 		else:
-			q = raw_input("What quantity do you want of the ingredient? ")
-			print ingredient['name'] + ' was added to the request'
-			req = [	ingredient['_id'], q]
-			order.append(req)
+			ingredient = findIngredient(name)
+			if ingredient == None:
+				print t.red("Ingredient was not found")
+			else:
+				q = raw_input("What quantity do you want of the ingredient? ")
+				try:
+					q = float(q)
+					print ingredient['name'] + ' was added to the request'
+					req = [	ingredient['_id'], q]
+					order.append(req)
+				except ValueError:
+					print "Please put a numeric quantity"
+				
 
 
 

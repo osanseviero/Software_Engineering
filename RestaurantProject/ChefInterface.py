@@ -128,7 +128,7 @@ class Chef():
 			elif(option == '4'):
 				self.findRecipeByName()
 			elif(option == '5'):
-				helper.requestIngredient()
+				helper.requestIngredients()
 			elif(option == '6'):
 				self.generatePopularyReport()
 			elif(option == '7'):

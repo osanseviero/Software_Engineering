@@ -31,7 +31,7 @@ class Storer():
 			print "What do you want to do?"
 			print t.blink(t.bold("(1)")), "Receive Ingredient"
 			print t.blink(t.bold("(2)")), "Print all stored ingredients"
-			print t.blink(t.bold("(3)")), "Check requests from the kitchen"
+			print t.blink(t.bold("(3)")), "Erase kitchen requests [l: ask from kitchen]"
 			print t.blink(t.red("(4)")), "Get kitchen requestss"
 			print t.blink(t.red("(5)")), "Exit warehouse interface"
 			option = raw_input(t.bold("1|2|3|4|5 "))
