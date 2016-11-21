@@ -33,16 +33,16 @@ def newOrder(tableId):
 		print t.blink(t.bold("(1)")), "Select dishes."
 		print t.blink(t.bold("(2)")), "Select drinks."
 		print t.blink(t.bold("(3)")), "Exit order interface"
-		option = input(t.bold("1|2|3 "))
-		if(option == 1):
+		option = raw_input(t.bold("1|2|3 "))
+		if(option == '1'):
 			helper.clearWindow()
 			helper.printRecipes()
 			selectRecipe(tableId)
-		elif(option == 2):
+		elif(option == '2'):
 			helper.clearWindow()
 			helper.printDrinks()
 			selectRecipe(tableId)
-		elif(option == 3):
+		elif(option == '3'):
 			anotherCommand = False
 		else:
 			helper.clearWindow()

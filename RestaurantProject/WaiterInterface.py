@@ -38,16 +38,16 @@ class Waiter():
 			print t.blink(t.bold("(3)")), "List all tables"
 			print t.blink(t.bold("(4)")), "Select table"
 			print t.blink(t.red("(5)")), "Exit waiter interface"
-			option = input(t.bold("1|2|3|4|5 "))
-			if(option == 1):
+			option = raw_input(t.bold("1|2|3|4|5 "))
+			if(option == '1'):
 				helper.printRecipes()
-			elif(option == 2):
+			elif(option == '2'):
 				helper.printDrinks()
-			elif(option == 3):
+			elif(option == '3'):
 				self.printTables()
-			elif(option == 4):
+			elif(option == '4'):
 				self.selectTable()
-			elif(option == 5):
+			elif(option == '5'):
 				anotherCommand = False
 			else:
 				helper.clearWindow()

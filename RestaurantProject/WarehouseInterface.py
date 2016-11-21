@@ -45,17 +45,17 @@ class Warehouse():
 			print t.blink(t.bold("(3)")), "Change price of ingredient"
 			print t.blink(t.red("(4)")), "Erase ingredients database [ERROR PRONE]"
 			print t.blink(t.red("(5)")), "Exit warehouse interface"
-			option = input(t.bold("1|2|3|4|5 "))
-			if(option == 1):
+			option = raw_input(t.bold("1|2|3|4|5 "))
+			if(option == '1'):
 				self.addIngredient()
-			elif(option == 2):
+			elif(option == '2'):
 				helper.printIngredients()
-			elif(option == 3):
+			elif(option == '3'):
 				helper.printIngredients()
 				self.updateIngredient()
-			elif(option == 4):
+			elif(option == '4'):
 				self.clearIngredients()
-			elif(option == 5):
+			elif(option == '5'):
 				anotherCommand = False
 			else:
 				helper.clearWindow()
