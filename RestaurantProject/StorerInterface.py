@@ -32,8 +32,9 @@ class Storer():
 			print t.blink(t.bold("(1)")), "Receive Ingredient"
 			print t.blink(t.bold("(2)")), "Print all stored ingredients"
 			print t.blink(t.bold("(3)")), "Check requests from the kitchen"
-			print t.blink(t.red("(4)")), "Exit warehouse interface"
-			option = raw_input(t.bold("1|2|3|4 "))
+			print t.blink(t.red("(4)")), "Get kitchen requestss"
+			print t.blink(t.red("(5)")), "Exit warehouse interface"
+			option = raw_input(t.bold("1|2|3|4|5 "))
 			if(option == '1'):
 				self.receiveIngredient()
 			elif(option == '2'):
@@ -41,6 +42,8 @@ class Storer():
 			elif(option == '3'):
 				db.drop_collection(helper.getStoredIngredients())
 			elif(option == '4'):
+				helper.printKitchenRequests()
+			elif(option == '5'):
 				anotherCommand = False
 			else:
 				helper.clearWindow()

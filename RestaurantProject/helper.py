@@ -18,8 +18,12 @@ def getIngredients():
 def getStoredIngredients():
 	return db.storedIngredients
 
-def getKitchenIngredients():
-	return db.kitchenIngredients
+def getRequestIngredients():
+	return db.requestIngredients
+
+def printKitchenRequests():
+	for request in getRequestIngredients():
+		print request[1]
 
 def newRecipe(name, price, type, ingredients):
 	'''Creates a recipe document and saves it to the recipes collection'''
@@ -141,8 +145,31 @@ def selectIngredients():
 			print ingredient['name'] + ' was added to the product'
 			order.append(ingredient['_id'])
 
+def printKitchenRequests():
+	'''Shows all the requests from the kitchen'''
+	print "almost"
+	for request in getRequestIngredients():
+		print "Ingredient " , request[0], " in quantity: ", request[1]
+
 def requestIngredients():
-	print 'hello'
+	'''Requests a set of ingredients and saves it as tuples of id - quantity'''
+	printIngredients()
+	name = ''
+	order = []
+	while(name != 's'):
+		name = raw_input("What's the name of the ingredient you want to request? Press s to save. ").lower()
+		if(name == 's'):
+			print order , " was added to the request"
+			getRequestIngredients().insert({'request' : order})
+
+		ingredient = findIngredient(name)
+		if ingredient == None:
+			print t.red("Ingredient was not found")
+		else:
+			q = raw_input("What quantity do you want of the ingredient? ")
+			print ingredient['name'] + ' was added to the request'
+			req = [	ingredient['_id'], q]
+			order.append(req)
 
 
 

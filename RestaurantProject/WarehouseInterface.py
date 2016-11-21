@@ -56,8 +56,9 @@ class Warehouse():
 			print t.blink(t.bold("(2)")), "Print all ingredients"
 			print t.blink(t.bold("(3)")), "Change price of ingredient"
 			print t.blink(t.red("(4)")), "Erase ingredients database [ERROR PRONE]"
-			print t.blink(t.red("(5)")), "Exit warehouse interface"
-			option = raw_input(t.bold("1|2|3|4|5 "))
+			print t.blink(t.bold("(5)")), "Check kitchen requests"
+			print t.blink(t.red("(6)")), "Exit warehouse interface"
+			option = raw_input(t.bold("1|2|3|4|5|6 "))
 			if(option == '1'):
 				self.addIngredient()
 			elif(option == '2'):
@@ -68,6 +69,8 @@ class Warehouse():
 			elif(option == '4'):
 				self.clearIngredients()
 			elif(option == '5'):
+				helper.printKitchenRequests()
+			elif(option == '6'):
 				anotherCommand = False
 			else:
 				helper.clearWindow()

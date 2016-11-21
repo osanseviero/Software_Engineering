@@ -91,7 +91,7 @@ class Bartender():
 			elif option == '3':
 				self.findRecipeByName()
 			elif option == '4':
-				helper.requestIngredient()
+				helper.requestIngredients()
 			elif option == '5':
 				self.generatePopularyReport()
 			elif option == '6':
