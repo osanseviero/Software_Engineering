@@ -23,11 +23,17 @@ class Waiter():
 	def selectTable(self):
 		helper.clearWindow()
 		self.printTables()
-		table = helper.findTable(int(raw_input("Write the table number: ")))
-		if(not table):
-			print "Table was not found"
+		tableid = raw_input("Write the table number: ")
+
+		if(tableid.isalpha()):
+			helper.clearWindow()
+			print "Sorry, you've entered an invalid character"
 		else:
-			Table.Table(table)
+			table = helper.findTable(int(tableid))
+			if(not table):
+				print "Table was not found"
+			else:
+				Table.Table(table)
 
 	def interface(self):
 		anotherCommand = True

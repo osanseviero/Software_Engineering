@@ -12,7 +12,7 @@ class Admin:
 		self.interface()
 
 	def createUser(self, user, name, lastname, password, salary, userType):
-		if(helper.isUser(name) != None):
+		if(helper.isUser(user) != None):
 			helper.clearWindow()
 			print "Sorry, this user already exists"
 		else:
@@ -26,11 +26,15 @@ class Admin:
 		username = raw_input(t.bold("Which is the username? "))
 		name = raw_input(t.bold("Which is the name? "))
 		lastName = raw_input(t.bold("Which is the lastname? "))
-		salary = int(raw_input(t.bold("Which is the salary? ")))
+		salary = raw_input(t.bold("Which is the salary? "))
 		password = getpass('Enter your password: ')
 		print "Which is the type of user?"
 		userType = raw_input(t.bold("(1)Admin (2)Chef (3) Waiter (4)Bartender (5) Warehouse Worker (6)Warehouse Admin"))
-		self.createUser(username, name, lastName, password, salary, userType)		
+		if(username == '' or name == '' or salary =='' or password == '' or userType == ''):
+			helper.clearWindow()
+			print "Sorry, we're missing some important information from the new user, try again"
+		else:
+			self.createUser(username, name, lastName, password, int(salary), userType)		
 
 	def count(self):
 		print "Total workers: ", self.workers.count()
