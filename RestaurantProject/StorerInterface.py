@@ -23,6 +23,21 @@ class Storer():
 				anotherIngredient = False
 				helper.clearWindow()
 
+	def fulfillKitchenRequests(self):
+		helper.printKitchenRequests()
+		requestId = input('Which request do you want to fulfill? ')
+		request = helper.getRequestById(int(requestId))
+		ingredient = helper.findStoredIngredientById(request[0])
+		if ingredient == None:
+			print "This ingredient is not in the warehouse, please request more."
+		print request[1]
+
+		# If there is more of this instance of the ingredient at the warehouse than the requested
+		if ingredient['quantity'] > request[1]:
+			ingredient['quantity'] -= request[1]
+			helper.updateStoredIngredient(ingredient['_id'], ingredient['quantity'])
+
+
 	def interface(self):
 		helper.clearWindow()
 		print "Warehouse interface"
@@ -31,8 +46,8 @@ class Storer():
 			print "What do you want to do?"
 			print t.blink(t.bold("(1)")), "Receive Ingredient"
 			print t.blink(t.bold("(2)")), "Print all stored ingredients"
-			print t.blink(t.bold("(3)")), "Erase kitchen requests [l: ask from kitchen]"
-			print t.blink(t.red("(4)")), "Get kitchen requestss"
+			print t.blink(t.bold("(3)")), "Fullfill kitchen Requests"
+			print t.blink(t.red("(4)")), "Get kitchen requests"
 			print t.blink(t.red("(5)")), "Exit warehouse interface"
 			option = raw_input(t.bold("1|2|3|4|5 "))
 			if(option == '1'):
@@ -40,7 +55,7 @@ class Storer():
 			elif(option == '2'):
 				helper.printStoredIngredients()
 			elif(option == '3'):
-				db.drop_collection(helper.getStoredIngredients())
+				self.fulfillKitchenRequests()
 			elif(option == '4'):
 				helper.printKitchenRequests()
 			elif(option == '5'):
