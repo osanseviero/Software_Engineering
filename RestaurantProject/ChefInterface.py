@@ -31,8 +31,8 @@ class Chef():
 		sure = raw_input(t.red("Are you sure you want to erase all your recipes?") + t.bold("[y/n]")).lower()
 		if(sure == 'y'):
 			db.drop_collection(helper.getRecipes())
+			print "All your recipes were erased"
 		helper.clearWindow()
-		print "All your recipes were erased"
 
 	def findRecipeByName(self):
 		'''Finds a recipe given a name.'''

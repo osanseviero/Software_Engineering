@@ -19,6 +19,7 @@ class System:
 				anotherCommand = False
 
 			elif(helper.isUser(username) == None):
+				helper.clearWindow()
 				print "Sorry there's no user with that name, try another one"
 
 			else:

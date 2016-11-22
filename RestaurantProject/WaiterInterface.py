@@ -55,6 +55,7 @@ class Waiter():
 			elif(option == '4'):
 				self.selectTable()
 			elif(option == '5'):
+				helper.clearWindow()
 				anotherCommand = False
 			else:
 				helper.clearWindow()

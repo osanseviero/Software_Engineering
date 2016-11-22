@@ -33,6 +33,10 @@ def newRecipe(name, price, type, ingredients):
 	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type, "ingredients" : ingredients, "ready" : False}
 	getRecipes().insert(newRecipe)
 	print "Created recipe for: " , t.bold(name)
+	"""print newrecipe['name'], ' has the following ingredients:'
+	for ingredientId in newrecipe['ingredients']:
+		ingredient = helper.findIngredientById(ingredientId)
+		print "\t" + ingredient['name']"""
 
 def newIngredient(name, price):
 	'''Creates an ingredient document and saves it to the recipes collection'''
@@ -181,7 +185,7 @@ def requestIngredients():
 	while(name != 's'):
 		name = raw_input("What's the name of the ingredient you want to request? Press s to save. ").lower()
 		if(name == 's'):
-			print order , " was added to the request"
+			print name , " was added to the request"
 			getRequestIngredients().insert({'request' : order})
 		else:
 			ingredient = findIngredient(name)

@@ -21,7 +21,8 @@ def selectRecipe(tableId):
 				print recipe['name'], " was added to the order."
 				order.append(recipe)
 				print "Current order: "
-				print order
+				for recipe in order:
+					print recipe["name"]
 
 def newOrder(tableId):
 	helper.clearWindow()

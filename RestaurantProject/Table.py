@@ -86,6 +86,8 @@ class Table():
 					helper.clearWindow()
 					print "I did not understand you. Please just write the number"
 			while(people !=  True):
+				if(self.table["numPeople"] > 0):
+					anotherCommand = False
 				print "Table interface of table " + str(self.table["num"])
 				print "What do you want to do?"
 				print t.blink(t.bold("(1)")), "Register new people"
@@ -94,13 +96,10 @@ class Table():
 				if(option == '1'):
 					helper.clearWindow()
 					self.registerPeople()
-					if(self.table["numPeople"] > 0):
-						people = True
-
+					anotherCommand = False
 					break
 				elif(option == '2'):
 					helper.clearWindow()
-					anotherCommand = False
 					break
 				else:
 					helper.clearWindow()
