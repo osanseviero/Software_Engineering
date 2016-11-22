@@ -36,9 +36,16 @@ class Storer():
 				if int(ingredient['quantity']) >= int(request[1]):
 					ingredient['quantity'] -= request[1]
 					request[1] = 0
-					print ingredient['quantity'], " and quantity: ", request[1]
+
+					# Delete the request
 					helper.deleteIngredient(request[0])
+
+					# Reduce the amount with the new wuantity
 					helper.updateStoredIngredient(ingredient['_id'], ingredient['quantity'])
+
+					# Add all request to kitchen
+					print request
+
 					keepTrying = False
 				else:
 					request[1] -= ingredient['quantity']

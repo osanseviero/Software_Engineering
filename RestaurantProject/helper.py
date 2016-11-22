@@ -21,11 +21,18 @@ def getStoredIngredients():
 def getRequestIngredients():
 	return db.requestIngredients
 
+def getKitchenStore():
+	return db.kitchenStore
+
 def printKitchenRequests():
 	for request in getRequestIngredients():
 		print request[1]
 
 kitchenRequestId = 0
+
+def printKitchenStore():
+	for i in getKitchenStore():
+		print i
 
 def newRecipe(name, price, type, ingredients):
 	'''Creates a recipe document and saves it to the recipes collection'''
