@@ -41,20 +41,17 @@ class Table():
 					break
 				print "Table interface of table " + str(self.table["num"])
 				print "What do you want to do?"
-				print t.blink(t.bold("(1)")), "Register new order"
-				print t.blink(t.bold("(2)")), "Change order"
-				print t.blink(t.bold("(3)")), "Get check"
-				print t.blink(t.bold("(4)")), "Close check"
-				print t.blink(t.red("(5)")), "Exit order interface"
+				print t.blink(t.bold("(1)")), "Order products"
+				print t.blink(t.bold("(2)")), "Get check"
+				print t.blink(t.bold("(3)")), "Close check"
+				print t.blink(t.red("(4)")), "Exit order interface"
 				option = raw_input(t.bold("1|2|3|4|5 "))
 				if(option == '1'):
 					order.newOrder(self.table['_id'])
-				elif(option == '2'):
-					order.update(self.table['_id'])
-				elif(option == '4'):
+				elif(option == '3'):
 					self.closeCheck()
 					people = False
-				elif(option == '5'):
+				elif(option == '4'):
 					helper.clearWindow()
 					anotherCommand = False
 					break

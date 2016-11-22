@@ -94,9 +94,9 @@ def printStoredIngredients():
 			print "\t cost: "  , ingredient['price'], " popularity: ", ingredient['pop']	
 			print "\t quantity: "  , storedIngredient['quantity'], " expiration: ", storedIngredient['expiration']	
 
-def isUser(name):
+def isUser(user):
 	'''finds if theres a user with such name'''
-	if(getWorkers().find_one({"name": name})):
+	if(getWorkers().find_one({"user": user})):
 		return 1
 	else:
 		return None
