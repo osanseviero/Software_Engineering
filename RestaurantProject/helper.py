@@ -96,6 +96,7 @@ def printStoredIngredients():
 			print "\t cost: "  , ingredient['price'], " popularity: ", ingredient['pop']	
 			print "\t quantity: "  , storedIngredient['quantity'], " expiration: ", storedIngredient['expiration']	
 
+
 def findStoredIngredientById(id):
 	for ingredient in getStoredIngredients().find():
 		if ingredient['ingredient_id'] == id:
@@ -106,9 +107,9 @@ def updateStoredIngredient(id, quantity):
 	print quantity	
 	getStoredIngredients().update({"_id" : id },{'$set' : {"quantity": quantity}})
 
-def isUser(name):
+def isUser(user):
 	'''finds if theres a user with such name'''
-	if(getWorkers().find_one({"name": name})):
+	if(getWorkers().find_one({"user": user})):
 		return 1
 	else:
 		return None

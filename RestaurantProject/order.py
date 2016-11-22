@@ -2,6 +2,7 @@ from config import *
 
 def selectRecipe(tableId):
 	name = ''
+	"""order = helper.findTable(tableId).[{"order"}]"""
 	order = []
 	while(name != 'e'):
 		name = raw_input("What's the name of the product? Press s to save. Press e to exit. ").lower()

@@ -28,6 +28,7 @@ class Table():
 
 
 	def interface(self):
+		helper.clearWindow()
 		anotherCommand = True
 		if(self.table["numPeople"] == 0 or self.table["check"] == "closed"):
 			people = False
@@ -35,26 +36,22 @@ class Table():
 			people = True
 		while(anotherCommand):
 			while(people):
-				helper.clearWindow()
 				if(self.table["numPeople"] == 0 or self.table["check"] == "closed"):
 					people = False
 					break
 				print "Table interface of table " + str(self.table["num"])
 				print "What do you want to do?"
-				print t.blink(t.bold("(1)")), "Register new order"
-				print t.blink(t.bold("(2)")), "Change order"
-				print t.blink(t.bold("(3)")), "Get check"
-				print t.blink(t.bold("(4)")), "Close check"
-				print t.blink(t.red("(5)")), "Exit order interface"
+				print t.blink(t.bold("(1)")), "Order products"
+				print t.blink(t.bold("(2)")), "Get check"
+				print t.blink(t.bold("(3)")), "Close check"
+				print t.blink(t.red("(4)")), "Exit order interface"
 				option = raw_input(t.bold("1|2|3|4|5 "))
 				if(option == '1'):
 					order.newOrder(self.table['_id'])
-				elif(option == '2'):
-					order.update(self.table['_id'])
-				elif(option == '4'):
+				elif(option == '3'):
 					self.closeCheck()
 					people = False
-				elif(option == '5'):
+				elif(option == '4'):
 					helper.clearWindow()
 					anotherCommand = False
 					break
@@ -62,16 +59,17 @@ class Table():
 					helper.clearWindow()
 					print "I did not understand you. Please just write the number"
 			while(people !=  True):
-				helper.clearWindow()
 				print "Table interface of table " + str(self.table["num"])
 				print "What do you want to do?"
 				print t.blink(t.bold("(1)")), "Register new people"
 				print t.blink(t.red("(2)")), "Exit order interface"
 				option = raw_input(t.bold("1|2"))
 				if(option == '1'):
+					helper.clearWindow()
 					self.registerPeople()
-					people = True
-					break
+					if(self.table["numPeople"] > 0):
+						people = True
+						break
 				elif(option == '2'):
 					helper.clearWindow()
 					anotherCommand = False
