@@ -27,6 +27,7 @@ def printKitchenRequests():
 
 kitchenRequestId = 0
 
+
 def newRecipe(name, price, type, ingredients):
 	'''Creates a recipe document and saves it to the recipes collection'''
 	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type, "ingredients" : ingredients, "ready" : False}
@@ -104,8 +105,10 @@ def findStoredIngredientById(id):
 	return None
 
 def updateStoredIngredient(id, quantity):
-	print quantity	
-	getStoredIngredients().update({"_id" : id },{'$set' : {"quantity": quantity}})
+	if quantity != 0:
+		getStoredIngredients().update({"_id" : id },{'$set' : {"quantity": quantity}})
+	else:
+		getStoredIngredients().delete_one({"_id": id})
 
 def isUser(user):
 	'''finds if theres a user with such name'''
@@ -203,6 +206,36 @@ def getRequestById(id):
 				return product
 	return None
 
+def updateRequestIngredient(iId, quantity):
+	print quantity
+	for request in getRequestIngredients().find():
+		id = request['_id']
+		print request
+		for product in request['request']:
+			if product[0] == iId:
+				copy = product
+				copy[1] = quantity
+				request['request'].remove(product)
+				request['request'].append(copy)
+				print request
+				getRequestIngredients().update({"_id" : id },{'$set' : {"request": request['request']}})
+				break
+
+
+def deleteIngredient(iId):
+	'''Delete an ingredient from a request. If it is the last ingredient, delete the request'''
+	cont = True
+	for request in getRequestIngredients().find():
+		id = request['_id']
+		if cont:
+			for product in request['request']:
+				if product[0] == iId:
+					request['request'].remove(product)
+					cont = False
+					if request['request'] == []:
+						getRequestIngredients().delete_one({'_id':id})
+					else:
+						getRequestIngredients().update({"_id" : id },{'$set' : {"request": request['request']}})
 
 def showPendingOrders(diff):
 	clearWindow()

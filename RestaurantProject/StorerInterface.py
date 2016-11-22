@@ -30,13 +30,31 @@ class Storer():
 		ingredient = helper.findStoredIngredientById(request[0])
 		if ingredient == None:
 			print "This ingredient is not in the warehouse, please request more."
-		print request[1]
+		else:
+			keepTrying = True
+			while request[1] > 0 and keepTrying:
+				if int(ingredient['quantity']) >= int(request[1]):
+					ingredient['quantity'] -= request[1]
+					request[1] = 0
 
-		# If there is more of this instance of the ingredient at the warehouse than the requested
-		if ingredient['quantity'] > request[1]:
-			ingredient['quantity'] -= request[1]
-			helper.updateStoredIngredient(ingredient['_id'], ingredient['quantity'])
+					# Delete the request
+					helper.deleteIngredient(request[0])
 
+					# Reduce the amount with the new wuantity
+					helper.updateStoredIngredient(ingredient['_id'], ingredient['quantity'])
+
+					# Add all request to kitchen
+					print request
+
+					keepTrying = False
+				else:
+					request[1] -= ingredient['quantity']
+					helper.updateStoredIngredient(ingredient['_id'], 0)
+					ingredient = helper.findStoredIngredientById(request[0])
+					if ingredient == None:
+						print "There was not enough of the ingredient in the warehouse to fulfill your request, sir."
+						keepTrying = False
+						helper.updateRequestIngredient(request[0], request[1])
 
 	def interface(self):
 		helper.clearWindow()

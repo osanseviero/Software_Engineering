@@ -42,7 +42,10 @@ class Chef():
 		if recipe == None:
 			print t.red("Recipe was not found")
 		else:
-			print recipe
+			print recipe['name'], ' has the following ingredients:'
+			for ingredientId in recipe['ingredients']:
+				ingredient = helper.findIngredientById(ingredientId)
+				print "\t" + ingredient['name']
 
 	def deleteByName(self):
 		'''Deletes a recipe given a name.'''
