@@ -104,5 +104,3 @@ class Table():
 				else:
 					helper.clearWindow()
 					print "I did not understand you. Please just write the number"
-
-	'''def interfaceWithoutPeople(self):'''

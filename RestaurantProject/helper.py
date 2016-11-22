@@ -211,7 +211,6 @@ def getRequestById(id):
 	return None
 
 def updateRequestIngredient(iId, quantity):
-	print quantity
 	for request in getRequestIngredients().find():
 		id = request['_id']
 		print request
@@ -221,7 +220,6 @@ def updateRequestIngredient(iId, quantity):
 				copy[1] = quantity
 				request['request'].remove(product)
 				request['request'].append(copy)
-				print request
 				getRequestIngredients().update({"_id" : id },{'$set' : {"request": request['request']}})
 				break
 
@@ -261,9 +259,6 @@ def readyUp(num, diff):
 					recipe["ready"] = True
 					print recipe["name"] + " completed."
 				i = i+1
-
-
-
 
 
 
