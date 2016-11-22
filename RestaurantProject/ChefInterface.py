@@ -15,7 +15,7 @@ class Chef():
 				print "Sorry, a recipe with this name is already in the database"
 			else:
 				price = 0
-				helper.printStoredIngredients()
+				helper.printIngredients()
 				ingredients = helper.selectIngredients()
 				for ingredientId in ingredients:
 					ingredient = helper.findIngredientById(ingredientId)
@@ -128,7 +128,7 @@ class Chef():
 			elif(option == '4'):
 				self.findRecipeByName()
 			elif(option == '5'):
-				helper.requestIngredient()
+				helper.requestIngredients()
 			elif(option == '6'):
 				self.generatePopularyReport()
 			elif(option == '7'):

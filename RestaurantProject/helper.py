@@ -25,6 +25,8 @@ def printKitchenRequests():
 	for request in getRequestIngredients():
 		print request[1]
 
+kitchenRequestId = 0
+
 def newRecipe(name, price, type, ingredients):
 	'''Creates a recipe document and saves it to the recipes collection'''
 	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type, "ingredients" : ingredients}
@@ -94,6 +96,17 @@ def printStoredIngredients():
 			print "\t cost: "  , ingredient['price'], " popularity: ", ingredient['pop']	
 			print "\t quantity: "  , storedIngredient['quantity'], " expiration: ", storedIngredient['expiration']	
 
+
+def findStoredIngredientById(id):
+	for ingredient in getStoredIngredients().find():
+		if ingredient['ingredient_id'] == id:
+			return ingredient
+	return None
+
+def updateStoredIngredient(id, quantity):
+	print quantity	
+	getStoredIngredients().update({"_id" : id },{'$set' : {"quantity": quantity}})
+
 def isUser(user):
 	'''finds if theres a user with such name'''
 	if(getWorkers().find_one({"user": user})):
@@ -147,9 +160,10 @@ def selectIngredients():
 
 def printKitchenRequests():
 	'''Shows all the requests from the kitchen'''
-	print "almost"
-	for request in getRequestIngredients():
-		print "Ingredient " , request[0], " in quantity: ", request[1]
+	print "Requests"
+	for requestObject in getRequestIngredients().find():
+		for request in requestObject['request']:
+			print request[2], ' :' + findIngredientById(request[0])['name'] + " quantity: ", request[1]
 
 def requestIngredients():
 	'''Requests a set of ingredients and saves it as tuples of id - quantity'''
@@ -161,16 +175,28 @@ def requestIngredients():
 		if(name == 's'):
 			print order , " was added to the request"
 			getRequestIngredients().insert({'request' : order})
-
-		ingredient = findIngredient(name)
-		if ingredient == None:
-			print t.red("Ingredient was not found")
 		else:
-			q = raw_input("What quantity do you want of the ingredient? ")
-			print ingredient['name'] + ' was added to the request'
-			req = [	ingredient['_id'], q]
-			order.append(req)
-
+			ingredient = findIngredient(name)
+			if ingredient == None:
+				print t.red("Ingredient was not found")
+			else:
+				q = raw_input("What quantity do you want of the ingredient? ")
+				try:
+					q = float(q)
+					print ingredient['name'] + ' was added to the request'
+					global kitchenRequestId
+					req = [	ingredient['_id'], q, kitchenRequestId]
+					order.append(req)
+					kitchenRequestId += 1
+				except ValueError:
+					print "Please put a numeric quantity"
+			
+def getRequestById(id):
+	for requestProducts in getRequestIngredients().find():
+		for product in requestProducts['request']:
+			if product[2] == id:
+				return product
+	return None
 
 
 
