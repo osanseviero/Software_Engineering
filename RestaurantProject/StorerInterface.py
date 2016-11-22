@@ -43,9 +43,6 @@ class Storer():
 					# Reduce the amount with the new wuantity
 					helper.updateStoredIngredient(ingredient['_id'], ingredient['quantity'])
 
-					# Add all request to kitchen
-					print request
-
 					keepTrying = False
 				else:
 					request[1] -= ingredient['quantity']
