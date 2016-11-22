@@ -56,7 +56,7 @@ class Admin:
 
 	def newTable(self, num, persons):
 		'''Creates a table document and saves it to the tables collection. Should just be in admin.'''
-		newTable = {"num" : num, "persons" : persons, "numPeople" : 0, "order" : []}
+		newTable = {"num" : num, "persons" : persons, "numPeople" : 0, "order" : [], "check" : "open"}
 		helper.getTables().insert(newTable)
 		print "Created table: " , t.bold(str(num))
 
