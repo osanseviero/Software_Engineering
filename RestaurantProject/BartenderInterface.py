@@ -79,11 +79,12 @@ class Bartender():
 			print t.blink(t.bold("(2)")), "Show all drinks"
 			print t.blink(t.bold("(3)")), "Find a drink by name"
 			print t.blink(t.bold("(4)")), "Make ingredient request"
-			print t.blink(t.bold("(5)")), "Generate popularity report"
-			print t.blink(t.red("(6)")), "Delete a drink by name"
-			print t.blink(t.red("(7)")), "Delete all drink"
-			print t.blink(t.red("(8)")), "Exit drink interface"
-			option = raw_input(t.bold("1|2|3|4|5|6|7 "))
+			print t.blink(t.bold("(5)")), "Show pending orders"
+			print t.blink(t.bold("(6)")), "Generate popularity report"
+			print t.blink(t.red("(7)")), "Delete a drink by name"
+			print t.blink(t.red("(8)")), "Delete all drink"
+			print t.blink(t.red("(9)")), "Exit drink interface"
+			option = raw_input(t.bold("1|2|3|4|5|6|7|8|9 "))
 			if option == '1':
 				self.createRecipe()
 			elif option == '2':
@@ -92,13 +93,20 @@ class Bartender():
 				self.findRecipeByName()
 			elif option == '4':
 				helper.requestIngredients()
-			elif option == '5':
-				self.generatePopularyReport()
+			elif option =='5':
+				helper.showPendingOrders("drink")
+				print "What do you want to do?"
+				readyup = raw_input(t.bold("1.Complete an order | 2.Exit"))
+				if(readyup == '1'):
+					readyup = raw_input(t.bold("Choose a number of dish you've completed"))
+					helper.readyUp(int(readyup), "drink")
 			elif option == '6':
-				self.deleteByName()
+				self.generatePopularyReport()
 			elif option == '7':
-				self.clearDrinks()
+				self.deleteByName()
 			elif option == '8':
+				self.clearDrinks()
+			elif option == '9':
 				anotherCommand = False
 			else:
 				helper.clearWindow()

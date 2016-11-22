@@ -113,12 +113,13 @@ class Chef():
 			print t.blink(t.bold("(2)")), "Create a new menu"
 			print t.blink(t.bold("(3)")), "Show all recipes"
 			print t.blink(t.bold("(4)")), "Find a recipe by name"
-			print t.blink(t.bold("(5)")), "Request ingredients to warehouse"
-			print t.blink(t.bold("(6)")), "Generate popularity report"
-			print t.blink(t.red("(7)")), "Delete a recipe by name"
-			print t.blink(t.red("(8)")), "Delete all recipes"
-			print t.blink(t.red("(9)")), "Exit chef interface"
-			option = raw_input(t.bold("1|2|3|4|5|6|7|8|9 "))
+			print t.blink(t.bold("(5)")), "Show pending orders"
+			print t.blink(t.bold("(6)")), "Request ingredients to warehouse"
+			print t.blink(t.bold("(7)")), "Generate popularity report"
+			print t.blink(t.red("(8)")), "Delete a recipe by name"
+			print t.blink(t.red("(9)")), "Delete all recipes"
+			print t.blink(t.red("(0)")), "Exit chef interface"
+			option = raw_input(t.bold("1|2|3|4|5|6|7|8|9|0 "))
 			if(option == '1'):
 				self.createRecipe()
 			elif(option == '2'):
@@ -128,14 +129,21 @@ class Chef():
 			elif(option == '4'):
 				self.findRecipeByName()
 			elif(option == '5'):
-				helper.requestIngredients()
+				helper.showPendingOrders("food")
+				print "What do you want to do?"
+				readyup = raw_input(t.bold("1.Complete an order | 2.Exit"))
+				if(readyup == '1'):
+					readyup = raw_input(t.bold("Choose a number of dish you've completed"))
+					helper.readyUp(int(readyup), "food")
 			elif(option == '6'):
-				self.generatePopularyReport()
+				helper.requestIngredients()
 			elif(option == '7'):
-				self.deleteByName()
+				self.generatePopularyReport()
 			elif(option == '8'):
-				self.clearRecipes()
+				self.deleteByName()
 			elif(option == '9'):
+				self.clearRecipes()
+			elif(option == '0'):
 				helper.clearWindow()
 				anotherCommand = False
 			else:

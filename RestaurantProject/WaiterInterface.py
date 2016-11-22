@@ -25,9 +25,10 @@ class Waiter():
 		self.printTables()
 		tableid = raw_input("Write the table number: ")
 
-		if(tableid.isalpha()):
+		if(tableid.isdigit() != True):
 			helper.clearWindow()
 			print "Sorry, you've entered an invalid character"
+
 		else:
 			table = helper.findTable(int(tableid))
 			if(not table):

@@ -29,7 +29,7 @@ kitchenRequestId = 0
 
 def newRecipe(name, price, type, ingredients):
 	'''Creates a recipe document and saves it to the recipes collection'''
-	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type, "ingredients" : ingredients}
+	newRecipe = {"name" : name, "price" : price, "pop" : 0, "type" : type, "ingredients" : ingredients, "ready" : False}
 	getRecipes().insert(newRecipe)
 	print "Created recipe for: " , t.bold(name)
 
@@ -202,6 +202,30 @@ def getRequestById(id):
 			if product[2] == id:
 				return product
 	return None
+
+
+def showPendingOrders(diff):
+	clearWindow()
+	i = 0
+	print "Pending orders: "
+	for table in getTables().find():
+		for recipe in table["order"]:
+			if(recipe["ready"] == False and recipe["type"] == diff):
+				print str(i) + "|" + recipe["name"]
+				i = i+1
+
+def readyUp(num, diff):
+	i = 0
+	for table in getTables().find():
+		for recipe in table["order"]:
+			if(recipe["ready"] == False and recipe["type"] == diff):
+				if(num == i):
+					print "que chow"
+					recipe["ready"] = True
+					print recipe["name"] + " completed."
+				i = i+1
+
+
 
 
 
