@@ -16,20 +16,40 @@ class Table():
 			print "The number needs to be bigger than 0"
 		else:
 			helper.getTables().update({"_id" : self.table['_id'] },{'$set' : {"numPeople": option, "check" : "open"}})
-			print "Registered the people"
+			print "Registered " + str(option) +  " people"
 
 
 	def closeCheck(self):
 		helper.clearWindow()
 		"""Conseguir precio final de todas las ordenes"""
 		helper.getTables().update({"_id" : self.table['_id'] },{'$set' : {"numPeople": 0,"order" : [], "check" : "closed"}})
+		print self.table["order"]
 		print str(self.table["_id"]) + "'s check has been closed"
+
+	def getCheck(self):
+		helper.clearWindow()
+		table = helper.findTableById(self.table["_id"])
+		order = table["order"]
+		totalPrice = 0
+		for recipe in order:
+			print "Product: " + recipe["name"] + "| price: " + str(recipe["price"])
+			totalPrice += recipe["price"]
+
+		print "The total price is " + str(totalPrice)
+		option = raw_input(t.bold("Do you wish to split? [y/n]"))
+		if(option == 'y'):
+			people = table["numPeople"]
+			print "Number of people: " + str(people)
+			split = totalPrice/float(people)
+			print "The account will be split into " + str(split)
+
 
 
 
 	def interface(self):
 		helper.clearWindow()
 		anotherCommand = True
+		madeCheck = False
 		if(self.table["numPeople"] == 0 or self.table["check"] == "closed"):
 			people = False
 		else:
@@ -48,9 +68,16 @@ class Table():
 				option = raw_input(t.bold("1|2|3|4|5 "))
 				if(option == '1'):
 					order.newOrder(self.table['_id'])
+				elif(option == '2'):
+					self.getCheck()
+					madeCheck = True
 				elif(option == '3'):
-					self.closeCheck()
-					people = False
+					if(madeCheck == True):
+						self.closeCheck()
+						people = False
+					else:
+						helper.clearWindow()
+						print "First you must get check"
 				elif(option == '4'):
 					helper.clearWindow()
 					anotherCommand = False
@@ -69,7 +96,8 @@ class Table():
 					self.registerPeople()
 					if(self.table["numPeople"] > 0):
 						people = True
-						break
+
+					break
 				elif(option == '2'):
 					helper.clearWindow()
 					anotherCommand = False
