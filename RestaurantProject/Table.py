@@ -16,13 +16,14 @@ class Table():
 			print "The number needs to be bigger than 0"
 		else:
 			helper.getTables().update({"_id" : self.table['_id'] },{'$set' : {"numPeople": option, "check" : "open"}})
-			print "Registered the people"
+			print "Registered " + option +  " people"
 
 
 	def closeCheck(self):
 		helper.clearWindow()
 		"""Conseguir precio final de todas las ordenes"""
 		helper.getTables().update({"_id" : self.table['_id'] },{'$set' : {"numPeople": 0,"order" : [], "check" : "closed"}})
+		print self.table["order"]
 		print str(self.table["_id"]) + "'s check has been closed"
 
 
@@ -69,7 +70,8 @@ class Table():
 					self.registerPeople()
 					if(self.table["numPeople"] > 0):
 						people = True
-						break
+
+					break
 				elif(option == '2'):
 					helper.clearWindow()
 					anotherCommand = False

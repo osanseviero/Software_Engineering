@@ -11,7 +11,7 @@ class System:
 		'''Code to log in the user and authenticate'''
 		anotherCommand = True
 		workers = db.workers
-	
+		
 		while anotherCommand:
 			username = raw_input(t.bold("Which is the username?(q for quit) "))
 
