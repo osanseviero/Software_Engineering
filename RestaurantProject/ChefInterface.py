@@ -42,7 +42,10 @@ class Chef():
 		if recipe == None:
 			print t.red("Recipe was not found")
 		else:
-			print recipe
+			print recipe['name'], ' has the following ingredients:'
+			for ingredientId in recipe['ingredients']:
+				ingredient = helper.findIngredientById(ingredientId)
+				print "\t" + ingredient['name']
 
 	def deleteByName(self):
 		'''Deletes a recipe given a name.'''
@@ -114,12 +117,11 @@ class Chef():
 			print t.blink(t.bold("(3)")), "Show all recipes"
 			print t.blink(t.bold("(4)")), "Find a recipe by name"
 			print t.blink(t.bold("(5)")), "Request ingredients to warehouse"
-			print t.blink(t.red("(6)")), "Print ingredients stored at the warehouse"
-			print t.blink(t.bold("(7)")), "Generate popularity report"
-			print t.blink(t.red("(8)")), "Delete a recipe by name"
-			print t.blink(t.red("(9)")), "Delete all recipes"
-			print t.blink(t.red("(10)")), "Exit chef interface"
-			option = raw_input(t.bold("1|2|3|4|5|6|7|8|9|10 "))
+			print t.blink(t.bold("(6)")), "Generate popularity report"
+			print t.blink(t.red("(7)")), "Delete a recipe by name"
+			print t.blink(t.red("(8)")), "Delete all recipes"
+			print t.blink(t.red("(9)")), "Exit chef interface"
+			option = raw_input(t.bold("1|2|3|4|5|6|7|8|9 "))
 			if(option == '1'):
 				self.createRecipe()
 			elif(option == '2'):
@@ -131,14 +133,12 @@ class Chef():
 			elif(option == '5'):
 				helper.requestIngredients()
 			elif(option == '6'):
-				helper.printKitchenStore()
-			elif(option == '7'):
 				self.generatePopularyReport()
-			elif(option == '8'):
+			elif(option == '7'):
 				self.deleteByName()
-			elif(option == '9'):
+			elif(option == '8'):
 				self.clearRecipes()
-			elif(option == '10'):
+			elif(option == '9'):
 				helper.clearWindow()
 				anotherCommand = False
 			else:
