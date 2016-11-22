@@ -2,9 +2,9 @@ from config import *
 
 def selectRecipe(tableId):
 	name = ''
-	"""table = helper.findTable(tableId)
-	order = table["order"]"""
-	order = []
+	table = helper.findTableById(tableId)
+	order = table["order"]
+
 	while(name != 'e'):
 		name = raw_input("What's the name of the product? Press s to save. Press e to exit. ").lower()
 		recipe = helper.findRecipe(name)
@@ -22,9 +22,6 @@ def selectRecipe(tableId):
 				order.append(recipe)
 				print "Current order: "
 				print order
-
-def updateOrder(tableId):
-	print "Que pashon"		
 
 def newOrder(tableId):
 	helper.clearWindow()
@@ -45,6 +42,7 @@ def newOrder(tableId):
 			helper.printDrinks()
 			selectRecipe(tableId)
 		elif(option == '3'):
+			helper.clearWindow()
 			anotherCommand = False
 		else:
 			helper.clearWindow()

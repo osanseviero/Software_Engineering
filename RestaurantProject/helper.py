@@ -134,6 +134,11 @@ def findTable(num):
 	'''Finds a table. Returns None if not found'''
 	return getTables().find_one({"num": num})
 
+def findTableById(num):
+	'''Finds a table. Returns None if not found'''
+	return getTables().find_one({"_id": num})
+
+
 def checkPassword(username, password):
 	hash = db.workers.find_one({"user": username})["password"]
 	return sha256_crypt.verify(password, hash)
