@@ -15,59 +15,69 @@ class Table():
 		elif(option < 1):
 			print "The number needs to be bigger than 0"
 		else:
-			helper.getTables().update({"_id" : self.table['_id'] },{'$set' : {"numPeople": option}})
+			helper.getTables().update({"_id" : self.table['_id'] },{'$set' : {"numPeople": option, "check" : "open"}})
 			print "Registered the people"
 
-	def withPeople(self):
-		helper.clearWindow()
-		print "Table interface of table " + str(self.table["num"])
-		anotherCommand = True
-		while(anotherCommand):
-			print "What do you want to do?"
-			print t.blink(t.bold("(1)")), "Register new people"
-			print t.blink(t.bold("(2)")), "Register new order"
-			print t.blink(t.bold("(3)")), "Change order"
-			print t.blink(t.bold("(4)")), "Get check"
-			print t.blink(t.bold("(5)")), "Close check"
-			print t.blink(t.red("(6)")), "Exit order interface"
-			option = raw_input(t.bold("1|2|3|4|5|6 "))
-			if(option == '1'):
-				self.registerPeople()
-			elif(option == '2'):
-				order.newOrder(self.table['_id'])
-			elif(option == '3'):
-				order.update(self.table['_id'])
-			elif(option == '6'):
-				helper.clearWindow()
-				anotherCommand = False
-			else:
-				helper.clearWindow()
-				print "I did not understand you. Please just write the number"
 
-	def withoutPeople(self):
+	def closeCheck(self):
 		helper.clearWindow()
-		print "Table interface of table " + str(self.table["num"])
-		anotherCommand = True
-		while(anotherCommand):
-			print "What do you want to do?"
-			print t.blink(t.bold("(1)")), "Register new people"
-			print t.blink(t.red("(2)")), "Exit order interface"
-			option = raw_input(t.bold("1|2"))
-			if(option == '1'):
-				self.registerPeople()
-			elif(option == '2'):
-				helper.clearWindow()
-				anotherCommand = False
-			else:
-				helper.clearWindow()
-				print "I did not understand you. Please just write the number"
+		"""Conseguir precio final de todas las ordenes"""
+		helper.getTables().update({"_id" : self.table['_id'] },{'$set' : {"numPeople": 0,"order" : [], "check" : "closed"}})
+		print str(self.table["_id"]) + "'s check has been closed"
 
-	'''def interfaceWithoutPeople(self):'''
+
 
 	def interface(self):
-		if(self.table["numPeople"] > 0):
-			self.withPeople()
+		anotherCommand = True
+		if(self.table["numPeople"] == 0 or self.table["check"] == "closed"):
+			people = False
 		else:
-			self.withoutPeople()
+			people = True
+		while(anotherCommand):
+			while(people):
+				helper.clearWindow()
+				if(self.table["numPeople"] == 0 or self.table["check"] == "closed"):
+					people = False
+					break
+				print "Table interface of table " + str(self.table["num"])
+				print "What do you want to do?"
+				print t.blink(t.bold("(1)")), "Register new order"
+				print t.blink(t.bold("(2)")), "Change order"
+				print t.blink(t.bold("(3)")), "Get check"
+				print t.blink(t.bold("(4)")), "Close check"
+				print t.blink(t.red("(5)")), "Exit order interface"
+				option = raw_input(t.bold("1|2|3|4|5 "))
+				if(option == '1'):
+					order.newOrder(self.table['_id'])
+				elif(option == '2'):
+					order.update(self.table['_id'])
+				elif(option == '4'):
+					self.closeCheck()
+					people = False
+				elif(option == '5'):
+					helper.clearWindow()
+					anotherCommand = False
+					break
+				else:
+					helper.clearWindow()
+					print "I did not understand you. Please just write the number"
+			while(people !=  True):
+				helper.clearWindow()
+				print "Table interface of table " + str(self.table["num"])
+				print "What do you want to do?"
+				print t.blink(t.bold("(1)")), "Register new people"
+				print t.blink(t.red("(2)")), "Exit order interface"
+				option = raw_input(t.bold("1|2"))
+				if(option == '1'):
+					self.registerPeople()
+					people = True
+					break
+				elif(option == '2'):
+					helper.clearWindow()
+					anotherCommand = False
+					break
+				else:
+					helper.clearWindow()
+					print "I did not understand you. Please just write the number"
 
-
+	'''def interfaceWithoutPeople(self):'''
